@@ -18,5 +18,6 @@ window.addEventListener("keydown", event => {
             alert("hello! this is the channel trailer speaking! thank you for pressing the theater key! as a reward, you get a pointless button for your work :D")
         }
         theater_button.click();
+        event.preventDefault();
     }
 });
