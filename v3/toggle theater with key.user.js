@@ -14,10 +14,13 @@ window.addEventListener("keydown", event => {
     const is_upsell = document.querySelector("#upsell-video .ytp-size-toggle-large");
 
     if (theater_button && event.code == "KeyT") {
+        const video_player = document.querySelector("#movie_player");
+
         if (is_upsell) {
             alert("hello! this is the channel trailer speaking! thank you for pressing the theater key! as a reward, you get a pointless button for your work :D")
         }
-        theater_button.click();
-        event.preventDefault();
+        if (document.activeElement == video_player) {
+            theater_button.click();
+        }
     }
 });
