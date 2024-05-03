@@ -1,0 +1,85 @@
+@media (max-height: 862px) {
+    .vordebugger.expanded {
+        max-height: 88vh;
+    }
+}
+
+
+/* slightly improve dark background */
+body, #guide-main, #guide-container, #masthead-search-terms, #watch7-sidebar, .exp-not-top-guide-fixed #watch-context-container, html {
+    background-attachment: fixed !important;
+}
+
+#page.watch {
+    padding-top: 0px !important;
+}
+
+#c4-shelves-container {
+    background-color: var(--color-fff) !important;
+}
+
+
+
+
+.html5-player-chrome {
+    background: var(--color-fff);
+}
+
+.appbar-mini-cinema #player:before {
+    background: none !important;
+}
+
+.appbar-mini-cinema #player {
+    width: auto !important;
+}
+
+#player:not(.watch-small) .player-width {
+    width: 100%;
+}
+
+.player-height {
+    height: fit-content !important;
+}
+
+.video-stream, .ytp-player-content, .ytp-endscreen-content {
+    position: relative !important;
+}
+
+.video-stream, .ytp-player-content {
+    top: 0px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+
+.video-stream {
+    width: 100%;
+    padding-bottom: 3px;
+}
+
+.html5-video-container {
+    position: relative;
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    height: 100%;
+}
+
+.html5-video-player:not(.ytp-block-autohide) .html5-player-chrome {
+    height: 0px;
+    transition: 0.2s all linear;
+}
+
+.ytp-subtitles-player-content {
+    position: absolute !important;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+}
+
+.ytp-endscreen-content {
+    position: relative !important;
+    margin-top: 0px !important;
+    width: 100% !important;
+    height: 480px !important;
+    padding: 20px 0 !important;
+}
