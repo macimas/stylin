@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         semi-better theater mode
 @description  an attempt to make theater mode act more like in modern YouTube
-@version      2.4
+@version      2.5
 
 @author     macimas (https://macimas.github.io)
 @namespace  https://github.com/macimas
@@ -13,8 +13,6 @@
 
 @var  text  mdt2-playlist-sidebar-width          "Playlist sidebar width"          380px
 @var  text  mdt2-playlist-sidebar-height-offset  "Playlist sidebar height offset"  35px
-
-@var  checkbox  mdt2-kill-vordebugger-hitbox  "Kill hitbox around Vordebugger expander (workaround fix if blocks video controls)"  0
 ==/UserStyle== */
 
 @-moz-document domain("www.youtube.com") {
@@ -24,11 +22,6 @@
         --mdt2-calc-player-height: calc(100vh - var(--mdt2-player-height-offset));
         --mdt2-calc-video-height: calc(100% - var(--mdt2-video-height-offset));
         --mdt2-calc-playlist-sidebar-height-offset: calc(var(--mdt2-calc-player-height) - var(--mdt2-playlist-sidebar-height-offset))
-    }
-    
-    if var(--mdt2-kill-vordebugger-hitbox) {
-        #vor_debugger_container .hitbox-area
-        { display: none }
     }
 
     /*
