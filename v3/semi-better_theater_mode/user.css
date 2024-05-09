@@ -1,0 +1,203 @@
+/* ==UserStyle==
+@name         semi-better theater mode
+@description  an attempt to make theater mode act more like in modern YouTube
+@version      2.6
+
+@author     macimas (https://macimas.github.io)
+@namespace  https://github.com/macimas
+
+@preprocessor stylus
+
+@var  checkbox  autohide-controls         "Autohide controls"         1
+@var  checkbox  shrink-video-by-controls  "Shrink video by controls"  0
+
+@var  text  player-height-offset        "Player height offset"          184px
+@var  text  video-height-offset         "Video height offset"           3px
+@var  text  video-shrink-height-offset  "Video height offset (shrink)"  30px
+
+@var  text  playlist-sidebar-width          "Playlist sidebar width"          380px
+@var  text  playlist-sidebar-height-offset  "Playlist sidebar height offset"  35px
+
+@var  checkbox  kill-vordebugger-hitbox  "Remove hitbox around the vordebugger (enable if you cannot use video controls near the vordebugger expander)"  0
+==/UserStyle== */
+
+@-moz-document domain("www.youtube.com") {
+	calc-player-height = s(
+		"calc(100vh - %s)", player-height-offset)
+
+	calc-video-height = s(
+		"calc(100% - %s)", video-height-offset)
+
+	calc-video-shrink-height = s(
+		"calc(100% - %s)", video-shrink-height-offset)
+
+	calc-playlist-sidebar-height-offset = s(
+		"calc(%s - %s)", calc-player-height, playlist-sidebar-height-offset)
+
+
+	/*
+	** there is an issue where the hitbox around the vordebugger may block video controls
+	** as a workaround, the user may toggle this to fix this
+	*/
+	
+	if (kill-vordebugger-hitbox) {
+		#vor_debugger_container .hitbox-area {
+			display: none;
+		}
+	}
+
+
+	/*
+	** === tweak and expand the theater! ===
+	*/
+
+	.appbar-mini-cinema #player.watch-medium:before
+	{ background-color: transparent }
+
+	html:not([data-player-size="fullscreen"]) #player.watch-medium {
+		padding-left: 0px !important;
+		width: 100% !important;
+
+		& .player-width
+		{ width: 100% }
+
+		& .player-height
+		{ height: calc-player-height }
+
+		& video {
+			object-fit: contain;
+
+			top: 0px !important;
+			left: 0px !important;
+
+			width: 100% !important;
+			height: 100% !important;
+		}
+
+		& .html5-video-container
+		{ height: calc-video-height !important }
+		
+		if (autohide-controls && shrink-video-by-controls) {
+			& .ytp-block-autohide .html5-video-container
+			{ height: calc-video-shrink-height !important }
+		}
+
+		if (!autohide-controls && shrink-video-by-controls) {
+			& .html5-video-container
+			{ height: calc-video-shrink-height !important }
+		}
+
+		& .html5-video-container
+		{ transition: 0.24s height ease-out }
+
+		& .html5-video-content {
+			top: 0px !important;
+			left: 0px !important;
+
+			width: 100% !important;
+			height: 100% !important;
+		}
+
+		& .html5-video-player.ended-mode video {
+			opacity: 0%;
+			transition: 0.16s opacity linear;
+		}
+
+
+		/* adjust playlists */
+
+		& #playlist-tray
+		{ z-index: 900 }
+
+		& .watch7-playlist-bar
+		{ display: flex }
+
+		& .watch7-playlist-bar-left
+		{ width: 100% }
+
+		& .watch-sidebar {
+			min-width: playlist-sidebar-width;
+			left: unset;
+			right: 0px;
+		}
+
+		& #watch7-playlist-tray-container
+		{ height: calc-playlist-sidebar-height-offset }
+
+		& .watch-playlist-collapsed #watch7-playlist-tray-container
+		{ height: 0 !important }
+
+
+		/* adjust dialogs */
+
+		& .ytp-dialog-holder {
+			width: 100%;
+			height: 100%;
+		}
+
+		& .ytp-dialog {
+			position: absolute;
+
+			top: 50% !important;
+			left: 50% !important;
+
+			margin-top: 0% !important;
+			margin-left: 0% !important;
+
+			transform: translate(-50%, -50%);
+		}
+
+
+		/* adjust annotations */
+
+		& .html5-video-content .video-annotations
+		{ height: 100% }
+
+		& .annotation.iv-cards {
+			display: flex;
+
+			top: 0px !important;
+
+			width: 100% !important;
+			height: 100% !important;
+		}
+
+		& .iv-cards-details {
+			top: 50% !important;
+			left: 50% !important;
+
+			transform: translate(-50%, -50%);
+		}
+
+
+		/*
+		** === autohide video controls! ===
+		*/
+
+		if (autohide-controls) {
+			& .html5-video-player:not(.ytp-block-autohide) .html5-player-chrome
+			{ height: 0px }
+
+			& .html5-video-player:not(.ytp-block-autohide) .html5-player-chrome > *
+			{ opacity: 0% }
+
+
+			/* adjust subtitles */
+			
+			& .ytp-subtitles-player-content
+			{ height: calc-video-height }
+			
+			& .ytp-block-autohide .ytp-subtitles-player-content
+			{ height: calc-video-shrink-height }
+		}
+
+		& .html5-player-chrome
+		{ transition: 0.24s height ease-out }
+
+		& .html5-player-chrome > *
+		{ transition: calc(0.24s / 2) opacity ease-out }
+
+		& .ytp-subtitles-player-content
+		{ transition: 0.24s height ease-out }
+	}
+}
