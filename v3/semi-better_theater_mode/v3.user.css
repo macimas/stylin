@@ -1,19 +1,19 @@
 /* ==UserStyle==
 @name         semi-better theater mode
 @description  an attempt to make theater mode act more like in modern YouTube
-@version      2.6
+@version      2.7
 
 @author     macimas (https://macimas.github.io)
 @namespace  https://github.com/macimas
 
 @preprocessor stylus
 
-@var  checkbox  autohide-controls         "Autohide controls"         1
-@var  checkbox  shrink-video-by-controls  "Shrink video by controls"  0
+@var  checkbox  autohide-controls         "Autohide controls"                                      1
+@var  checkbox  shrink-video-by-controls  "Shrink video by controls (requires Autohide controls)"  0
 
-@var  text  player-height-offset        "Player height offset"          184px
-@var  text  video-height-offset         "Video height offset"           3px
-@var  text  video-shrink-height-offset  "Video height offset (shrink)"  30px
+@var  text  player-height-offset        "Player height offset"             184px
+@var  text  video-height-offset         "Video height offset"              3px
+@var  text  video-shrink-height-offset  "Video height offset (on shrink)"  35px
 
 @var  text  playlist-sidebar-width          "Playlist sidebar width"          380px
 @var  text  playlist-sidebar-height-offset  "Playlist sidebar height offset"  35px
@@ -79,11 +79,6 @@
 		
 		if (autohide-controls && shrink-video-by-controls) {
 			& .ytp-block-autohide .html5-video-container
-			{ height: calc-video-shrink-height !important }
-		}
-
-		if (!autohide-controls && shrink-video-by-controls) {
-			& .html5-video-container
 			{ height: calc-video-shrink-height !important }
 		}
 
