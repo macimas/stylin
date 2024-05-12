@@ -1,29 +1,34 @@
 /* ==UserStyle==
 @name         semi-better theater mode
 @description  an attempt to make theater mode act more like in modern YouTube
-@version      2.7
+@version      2.8
 
 @author     macimas (https://macimas.github.io)
 @namespace  https://github.com/macimas
 
 @preprocessor stylus
 
-@var  checkbox  autohide-controls         "Autohide controls"                                      1
-@var  checkbox  shrink-video-by-controls  "Shrink video by controls (requires Autohide controls)"  0
+@var  checkbox  autohide-controls         "Autohide controls"           1
+@var  checkbox  shrink-video-by-controls  "^ Shrink video by controls"  0
 
-@var  text  player-height-offset        "Player height offset"             184px
+@var  text  player-height-offset               "Player height offset"                 184px
+@var  text  playlist-bar-height-consideration  "^ Playlist bar height consideration"  34px
+
 @var  text  video-height-offset         "Video height offset"              3px
 @var  text  video-shrink-height-offset  "Video height offset (on shrink)"  35px
 
 @var  text  playlist-sidebar-width          "Playlist sidebar width"          380px
 @var  text  playlist-sidebar-height-offset  "Playlist sidebar height offset"  35px
 
-@var  checkbox  kill-vordebugger-hitbox  "Remove hitbox around the vordebugger (enable if you cannot use video controls near the vordebugger expander)"  0
+@var  checkbox  tweak-vordebugger-hitbox  "Tweak vordebugger hitbox (enable if you cannot use video controls near the vordebugger expander)"  0
 ==/UserStyle== */
 
 @-moz-document domain("www.youtube.com") {
 	calc-player-height = s(
 		"calc(100vh - %s)", player-height-offset)
+		
+	calc-playlist-player-height = s(
+		"calc(%s - %s)", calc-player-height, playlist-bar-height-consideration)
 
 	calc-video-height = s(
 		"calc(100% - %s)", video-height-offset)
@@ -40,9 +45,23 @@
 	** as a workaround, the user may toggle this to fix this
 	*/
 	
-	if (kill-vordebugger-hitbox) {
-		#vor_debugger_container .hitbox-area {
-			display: none;
+	if (tweak-vordebugger-hitbox) {
+		body:has(#page.watch) {
+			#vor_debugger_container {
+				width: fit-content;
+				height: fit-content;
+			}
+
+			#vor_debugger_container .hitbox-area {
+				right: unset;
+
+				width: 100%;
+				height: 100%;
+			}
+
+			#vor_debugger_container .hitbox-area + .vordebugger:not(.expanded) {
+				position: relative;
+			}
 		}
 	}
 
@@ -63,12 +82,17 @@
 
 		& .player-height
 		{ height: calc-player-height }
+		
+		&:has(#playlist > .watch7-playlist) {
+			& .player-height
+			{ height: calc-playlist-player-height }
+		}
 
 		& video {
 			object-fit: contain;
 
-			top: 0px !important;
-			left: 0px !important;
+			top: unset !important;
+			left: unset !important;
 
 			width: 100% !important;
 			height: 100% !important;
@@ -86,8 +110,8 @@
 		{ transition: 0.24s height ease-out }
 
 		& .html5-video-content {
-			top: 0px !important;
-			left: 0px !important;
+			top: unset !important;
+			left: unset !important;
 
 			width: 100% !important;
 			height: 100% !important;
@@ -120,7 +144,7 @@
 		{ height: calc-playlist-sidebar-height-offset }
 
 		& .watch-playlist-collapsed #watch7-playlist-tray-container
-		{ height: 0 !important }
+		{ height: 0px !important }
 
 
 		/* adjust dialogs */
@@ -151,7 +175,7 @@
 		& .annotation.iv-cards {
 			display: flex;
 
-			top: 0px !important;
+			top: unset !important;
 
 			width: 100% !important;
 			height: 100% !important;
