@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         semi-better theater mode
 @description  an attempt to make theater mode act more like in modern YouTube
-@version      2.8
+@version      2.9
 
 @author     macimas (https://macimas.github.io)
 @namespace  https://github.com/macimas
@@ -26,7 +26,7 @@
 @-moz-document domain("www.youtube.com") {
 	calc-player-height = s(
 		"calc(100vh - %s)", player-height-offset)
-		
+
 	calc-playlist-player-height = s(
 		"calc(%s - %s)", calc-player-height, playlist-bar-height-consideration)
 
@@ -37,8 +37,7 @@
 		"calc(100% - %s)", video-shrink-height-offset)
 
 	calc-playlist-sidebar-height-offset = s(
-		"calc(%s - %s)", calc-player-height, playlist-sidebar-height-offset)
-
+		"calc(%s - %s - %s)", calc-player-height, playlist-sidebar-height-offset, playlist-bar-height-consideration)
 
 	/*
 	** there is an issue where the hitbox around the vordebugger may block video controls
@@ -65,7 +64,6 @@
 		}
 	}
 
-
 	/*
 	** === tweak and expand the theater! ===
 	*/
@@ -74,7 +72,7 @@
 	{ background-color: transparent }
 
 	html:not([data-player-size="fullscreen"]) #player.watch-medium {
-		padding-left: 0px !important;
+		padding-left: unset !important;
 		width: 100% !important;
 
 		& .player-width
@@ -83,10 +81,9 @@
 		& .player-height
 		{ height: calc-player-height }
 		
-		&:has(#playlist > .watch7-playlist) {
-			& .player-height
-			{ height: calc-playlist-player-height }
-		}
+		/* adjust player height for playlist */
+		&:has(#playlist > .watch7-playlist) .player-height
+		{ height: calc-playlist-player-height }
 
 		& video {
 			object-fit: contain;
@@ -125,9 +122,6 @@
 
 		/* adjust playlists */
 
-		& #playlist-tray
-		{ z-index: 900 }
-
 		& .watch7-playlist-bar
 		{ display: flex }
 
@@ -140,10 +134,10 @@
 			right: 0px;
 		}
 
-		& #watch7-playlist-tray-container
+		& #playlist-tray #watch7-playlist-tray-container
 		{ height: calc-playlist-sidebar-height-offset }
 
-		& .watch-playlist-collapsed #watch7-playlist-tray-container
+		&.watch-playlist-collapsed #watch7-playlist-tray-container
 		{ height: 0px !important }
 
 
