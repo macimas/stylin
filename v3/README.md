@@ -16,6 +16,44 @@ it's a bit iffy, but should be good enough (for me at the very least)
 
 ![preview](./semi-better_vordebugger/preview.png)
 
+### dark mode for StarTube [[userstyle]](https://github.com/macimas/stylin/raw/main/v3/dark_mode_for_StarTube/v3.user.css)
+a messy attempt to add dark mode for StarTube's layouts + very minor tweaks
+
+<table>
+	<tr>
+		<th colspan="3">Epic Panda</th>
+	<tr>
+	<tr>
+		<td><img src="./dark_mode_for_StarTube/Epic Panda home page.png"></td>
+		<td><img src="./dark_mode_for_StarTube/Epic Panda channel page.png"></td>
+		<td><img src="./dark_mode_for_StarTube/Epic Panda watch page.png"></td>
+	</tr>
+	<tr>
+		<th colspan="3">Cosmic Panda</th>
+	<tr>
+	<tr>
+		<td><img src="./dark_mode_for_StarTube/Cosmic Panda home page.png"></td>
+		<td><img src="./dark_mode_for_StarTube/Cosmic Panda channel page.png"></td>
+		<td><img src="./dark_mode_for_StarTube/Cosmic Panda watch page.png"></td>
+	</tr>
+	<tr>
+		<th colspan="3">2014 (alt watch9)</th>
+	<tr>
+	<tr>
+		<td><img src="./dark_mode_for_StarTube/2014 home page.png"></td>
+		<td><img src="./dark_mode_for_StarTube/2014 channel page.png"></td>
+		<td><img src="./dark_mode_for_StarTube/2014 alt watch9 page.png"></td>
+	</tr>
+	<tr>
+		<th colspan="3">2017 (alt watch9)</th>
+	<tr>
+	<tr>
+		<td><img src="./dark_mode_for_StarTube/2017 home page.png"></td>
+		<td><img src="./dark_mode_for_StarTube/2017 channel page.png"></td>
+		<td><img src="./dark_mode_for_StarTube/2017 alt watch9 page.png"></td>
+	</tr>
+</table>
+
 ### clear button for search bar [[userscript]](https://github.com/macimas/stylin/raw/main/v3/clear%20button%20for%20search%20bar.user.js)
 probably dirty attempt to add a button to clear search bar
 <br>
