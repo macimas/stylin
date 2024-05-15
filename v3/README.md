@@ -9,6 +9,22 @@ it also works with StarTube at least when i tried it with most layouts, altho i 
 
 ![preview](./semi-better_theater_mode/preview.gif)
 
+### semi-better dark mode [[userstyle]](https://github.com/macimas/stylin/raw/main/v3/semi-better_dark_mode/v3.user.css)
+an attempt to improve dark mode + some minor tweaking
+
+<table>
+	<tr>
+		<td><img src="./semi-better_dark_mode/home page.png"></td>
+	</tr>
+	<tr>
+		<td><img src="./semi-better_dark_mode/channel page.png"></td>
+
+	</tr>
+	<tr>
+		<td><img src="./semi-better_dark_mode/watch page.png"></td>
+	</tr>
+</table>
+
 ### semi-better vordebugger [[userstyle]](https://github.com/macimas/stylin/raw/main/v3/semi-better_vordebugger/v3.user.css)
 an attempt to improve the vordebugger, with my personal preference
 <br>
