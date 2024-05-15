@@ -1,6 +1,6 @@
 /* ==UserStyle==
 @name         semi-better dark mode
-@description  an attempt to improve dark mode + some minor tweaking
+@description  an attempt to improve dark mode
 @version      1.0
 
 @author     macimas (https://macimas.github.io)
@@ -39,6 +39,9 @@
 
 	#appbar-nav .yt-uix-button.yt-uix-button-epic-nav-item
 	{ color: var(--color-666) }
+	
+	.exp-top-guide-mini.show-guide .yt-uix-button-icon-appbar-guide
+	{ background-position: -94px -632px !important }
 
 	body #footer-container, #footer-main
 	{ border-color: var(--color-db) }
