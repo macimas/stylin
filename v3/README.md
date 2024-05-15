@@ -18,7 +18,6 @@ an attempt to improve dark mode + some minor tweaking
 	</tr>
 	<tr>
 		<td><img src="./semi-better_dark_mode/channel page.png"></td>
-
 	</tr>
 	<tr>
 		<td><img src="./semi-better_dark_mode/watch page.png"></td>
