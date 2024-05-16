@@ -1,19 +1,64 @@
 /* ==UserStyle==
 @name         minor player tweaks
-@description  for now, mainly fixes minor issues with certain elements blocking video interaction (subtitles, and the Options dialog for subtitles)
-@version      1.0
+@description  tweakity player
+@version      1.1
 
 @author     macimas (https://macimas.github.io)
 @namespace  https://github.com/macimas
+
+@preprocessor stylus
+
+@var  checkbox  menu-kill-autoplay    "🔪 Remove Autoplay in menu"     0
+@var  checkbox  menu-kill-annotations "🔪 Remove Annotations in menu"  0
+@var  checkbox  menu-kill-dash        "🔪 Remove DASH in menu"         0
+
+@var  checkbox  menu-compact-subtitles  "⚙️ Compact Subtitles in menu (wip)"  0
 ==/UserStyle== */
 
 @-moz-document domain("www.youtube.com") {
-    #page.watch .ytp-player-content.ytp-subtitles-player-content
+	/* fix elements that partially block video interaction */
+
+	#page.watch .ytp-player-content.ytp-subtitles-player-content
 	{ pointer-events: none }
-	
+
 	#page.watch .ytp-dialog-holder
 	{ pointer-events: none }
 	
 	.ytp-dialog
 	{ pointer-events: auto }
+	
+	/* hide options in menu */
+
+	if (menu-kill-autoplay) {
+		.ytp-menu-row:has(div[aria-label="Autoplay"])
+		{ display: none }
+	}
+
+	if (menu-kill-annotations) {
+		.ytp-menu-row:has(div[aria-label="Annotations"])
+		{ display: none }
+	}
+
+	if (menu-kill-dash) {
+		.ytp-menu-row:has(div[aria-label="DASH"])
+		{ display: none }
+	}
+	
+	/* slightly compact Subtitles option in menu */
+	
+	if (menu-compact-subtitles) {
+		.ytp-menu-row:has(div[aria-label="Subtitles/CC"]) {
+			position: relative;
+			
+			& .ytp-menu-cell:nth-child(1) {
+				vertical-align: top;
+			}
+
+			& .ytp-menu-cell:nth-child(3) {
+				position: absolute;
+				bottom: 0px;
+				left: 23px;
+			}
+		}
+	}
 }
