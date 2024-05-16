@@ -69,6 +69,11 @@ a messy attempt to add dark mode for StarTube's layouts + very minor tweaks
 	</tr>
 </table>
 
+### minor player tweaks [[userstyle]](https://github.com/macimas/stylin/raw/main/v3/minor_player_tweaks/v3.user.css)
+for now, mainly fixes minor issues with certain elements blocking video interaction (subtitles, and the Options dialog for subtitles)
+
+![preview](./minor_player_tweaks/preview.png)
+
 ### clear button for search bar [[userscript]](https://github.com/macimas/stylin/raw/main/v3/clear%20button%20for%20search%20bar.user.js)
 probably dirty attempt to add a button to clear search bar
 <br>

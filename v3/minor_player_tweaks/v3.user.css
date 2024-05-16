@@ -1,0 +1,19 @@
+/* ==UserStyle==
+@name         minor player tweaks
+@description  for now, mainly fixes minor issues with certain elements blocking video interaction (subtitles, and the Options dialog for subtitles)
+@version      1.0
+
+@author     macimas (https://macimas.github.io)
+@namespace  https://github.com/macimas
+==/UserStyle== */
+
+@-moz-document domain("www.youtube.com") {
+    #page.watch .ytp-player-content.ytp-subtitles-player-content
+	{ pointer-events: none }
+	
+	#page.watch .ytp-dialog-holder
+	{ pointer-events: none }
+	
+	.ytp-dialog
+	{ pointer-events: auto }
+}
