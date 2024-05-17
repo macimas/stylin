@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         minor player tweaks
 @description  tweakity player
-@version      1.1
+@version      1.2
 
 @author     macimas (https://macimas.github.io)
 @namespace  https://github.com/macimas
@@ -13,6 +13,8 @@
 @var  checkbox  menu-kill-dash        "🔪 Remove DASH in menu"         0
 
 @var  checkbox  menu-compact-subtitles  "⚙️ Compact Subtitles in menu (wip)"  0
+
+@var  checkbox  autohide-cursor  "🐁 Autohide cursor"  0
 ==/UserStyle== */
 
 @-moz-document domain("www.youtube.com") {
@@ -50,15 +52,25 @@
 		.ytp-menu-row:has(div[aria-label="Subtitles/CC"]) {
 			position: relative;
 			
-			& .ytp-menu-cell:nth-child(1) {
-				vertical-align: top;
-			}
+			& .ytp-menu-cell:nth-child(1)
+			{ vertical-align: top }
 
 			& .ytp-menu-cell:nth-child(3) {
 				position: absolute;
 				bottom: 0px;
 				left: 23px;
 			}
+		}
+	}
+	
+	/* autohide cursor */
+	
+	if (autohide-cursor) {
+		html.page-inactive #player:has(.html5-video-player:not(.ytp-block-autohide)) {
+			cursor: none;
+
+			& .html5-video-controls
+			{ pointer-events: none }
 		}
 	}
 }
