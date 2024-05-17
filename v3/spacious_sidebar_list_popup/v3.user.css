@@ -1,0 +1,35 @@
+/* ==UserStyle==
+@name         spacious sidebar list popup
+@description  view more of your subscriptions and playlists, i guess
+@version      1.0
+
+@author     macimas (https://macimas.github.io)
+@namespace  https://github.com/macimas
+
+@preprocessor stylus
+
+@var  text  width-property    "width:"  "230px"
+@var  text  top-property        "top:"  "39px"
+@var  text  bottom-property  "bottom:"  "0px"
+==/UserStyle== */
+
+@-moz-document domain("www.youtube.com") {
+	.guide-flyout, .guide-collections-flyout {
+		position: fixed;
+		top: top-property;
+		bottom: bottom-property;
+	}
+
+	.guide-flyout
+	{ width: width-property }
+
+	.exp-top-guide .guide-channels-list {
+		overflow-y: scroll;
+
+		max-height: 100%;
+	}
+	
+	.exp-top-guide .guide-flyout .display-name,
+	.exp-top-guide .guide-flyout .yt-valign-container
+	{ width: calc(100% - 32px) }
+}
