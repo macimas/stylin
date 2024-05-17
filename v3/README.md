@@ -74,6 +74,13 @@ for now, mainly fixes minor issues with certain elements blocking video interact
 
 ![preview](./minor_player_tweaks/preview.png)
 
+### kill recommended channels [[userstyle]](https://github.com/macimas/stylin/raw/main/v3/kill_recommended_channels/v3.user.css)
+for when you think it's a waste of space
+
+![home page](./kill_recommended_channels/home page.png)
+![channel page 1](./kill_recommended_channels/channel page 1.png)
+![channel page 2](./kill_recommended_channels/channel page 2.png)
+
 ### clear button for search bar [[userscript]](https://github.com/macimas/stylin/raw/main/v3/clear%20button%20for%20search%20bar.user.js)
 probably dirty attempt to add a button to clear search bar
 <br>
