@@ -1,26 +1,34 @@
 /* ==UserStyle==
 @name         semi-better theater mode
 @description  an attempt to make theater mode act more like in modern YouTube
-@version      2.10
+@version      2.11
 
 @author     macimas (https://macimas.github.io)
 @namespace  https://github.com/macimas
 
 @preprocessor stylus
 
-@var  checkbox  autohide-controls         "Autohide controls"           1
-@var  checkbox  shrink-video-by-controls  "^ Shrink video by controls"  0
-
 @var  text  player-height-offset               "Player height offset"                 184px
-@var  text  playlist-bar-height-consideration  "^ Playlist bar height consideration"  34px
+@var  text  playlist-bar-height-consideration  "> Playlist bar height consideration"  34px
 
 @var  text  video-height-offset         "Video height offset"              3px
-@var  text  video-shrink-height-offset  "Video height offset (on shrink)"  35px
-
 @var  text  playlist-sidebar-width          "Playlist sidebar width"          380px
 @var  text  playlist-sidebar-height-offset  "Playlist sidebar height offset"  35px
 
-@var  checkbox  fancy-transitions  "Fancy transitions for mode toggle"  0
+@var  checkbox  autohide-controls  "Autohide controls"  1
+
+@var  checkbox  autohide-progress-bar                "> Autohide progress bar"        0
+@var  checkbox  autohide-ignore-video-height-offset  ">> Ignore video height offset"  1
+
+@var  checkbox  shrink-video-by-controls    "> Shrink video by controls"          0
+@var  text      video-shrink-height-offset  ">> Video height offset on shrink"  35px
+
+@var  checkbox  fancy-transitions      "Fancy transitions for mode toggle"  1
+@var  checkbox  fancy-transitions-fix  "> Fix video list jerking"           1
+
+@var  checkbox  remove-top-padding  "Remove space above the player"  1
+
+@var  checkbox  custom-player-compat  "Compat for CSS-applied custom players"  1
 
 @var  checkbox  tweak-vordebugger-hitbox  "Tweak vordebugger hitbox (enable if you cannot use video controls near the vordebugger expander)"  0
 ==/UserStyle== */
@@ -64,6 +72,25 @@
 			{ position: relative }
 		}
 	}
+	
+	/*
+	** compat tweaks for css-applied custom players
+	*/
+	
+	if (custom-player-compat) {
+		html:not([data-player-size="fullscreen"]) #page.watch {
+			& .html5-video-controls
+			{ min-height: unset }
+
+			& #player.watch-medium .html5-video-player {
+				&:not(.ytp-block-autohide) .html5-player-chrome
+				{ padding-bottom: unset }
+
+				& .ytp-subtitles-player-content .standard-caption-window
+				{ padding-bottom: 15px }
+			}
+		}
+	}
 
 	/*
 	** === toggle with transition! ===
@@ -71,9 +98,12 @@
 		
 	if (fancy-transitions) {
 		#page #player, .player-width, .player-height
-		{ transition: 0.24s width ease-in-out, 0.24s height ease-in-out }
+		{ transition: 0.24s width ease-in-out, 0.24s height ease-in-out, 0.24s padding-left ease-in-out }
 
 		/* feels a bit goofy doing this but it makes transition somewhat less jarring */
+
+		#page #player
+		{ margin-bottom: unset }
 
 		html:not([data-player-size="fullscreen"]) #page.watch #player {
 			& .html5-video-player:not(.ended-mode) video {
@@ -87,16 +117,45 @@
 			}
 		}
 
-		#watch7-sidebar
-		{ width: 100% }
-
 		html:has(#player.watch-medium) #watch7-sidebar
 		{ transition-delay: 0.24s }
+
+		if (fancy-transitions-fix) {
+			#watch7-sidebar {
+				padding-right: 13px;
+
+				width: 100%;
+			}
+
+			@media screen and (min-width: 1496px) and (min-height: 768px) {
+				.appbar-flexwatch-mini #watch7-sidebar {
+					padding-right: 3px;
+				}
+			}
+
+			@media screen and (min-width: 2130px) and (min-height: 1080px) {
+				.appbar-flexwatch-mini #watch7-sidebar {
+					padding-right: 13px;
+				}
+			}
+		}
 	}
 
 	/*
 	** === tweak and expand the theater! ===
 	*/
+	
+	html:not([data-player-size="fullscreen"]) #page.watch {
+		if (remove-top-padding) {
+			&:has(#player.watch-medium)
+			{ padding-top: unset }
+		}
+
+		if (fancy-transitions) {
+			&
+			{ transition: 0.24s ease-in-out padding-top }
+		}
+	}
 
 	html:not([data-player-size="fullscreen"]) #page.watch #player.watch-medium {
 		padding-left: unset;
@@ -110,8 +169,7 @@
 
 		& .player-height
 		{ height: calc-player-height }
-		
-		/* adjust player height for playlist */
+
 		&:has(#playlist > .watch7-playlist) .player-height
 		{ height: calc-playlist-player-height }
 
@@ -131,6 +189,11 @@
 		if (autohide-controls && shrink-video-by-controls) {
 			& .ytp-block-autohide .html5-video-container
 			{ height: calc-video-shrink-height }
+		}
+
+		if (autohide-controls && (autohide-progress-bar && autohide-ignore-video-height-offset)) {
+			& .html5-video-container
+			{ height: 100% }
 		}
 
 		& .html5-video-container
@@ -215,21 +278,33 @@
 			transform: translate(-50%, -50%);
 		}
 
-
 		/*
 		** === autohide video controls! ===
 		*/
 
 		if (autohide-controls) {
-			& .html5-video-player:not(.ytp-block-autohide) .html5-player-chrome
-			{ height: 0px }
+			& .html5-video-player:not(.ytp-block-autohide) {
+				.html5-player-chrome
+				{ height: 0px }
 
-			& .html5-video-player:not(.ytp-block-autohide) .html5-player-chrome > *
-			{ opacity: 0% }
+				.html5-player-chrome > *
+				{ opacity: 0% }
+
+
+				/* autohide progress bar */
+		
+				if (autohide-progress-bar) {
+					& .ytp-progress-bar-container {
+						opacity: 0%;
+						
+						transition-delay: 0.24s;
+					}
+				}
+			}
 
 
 			/* adjust subtitles */
-			
+
 			& .ytp-subtitles-player-content
 			{ height: calc-video-height }
 			
@@ -245,5 +320,9 @@
 
 		& .ytp-subtitles-player-content
 		{ transition: 0.24s height ease-out }
+		
+		& .ytp-progress-bar-container
+		{ transition: 0.24s opacity ease-out }
+
 	}
 }
