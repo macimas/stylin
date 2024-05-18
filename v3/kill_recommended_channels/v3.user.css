@@ -1,15 +1,14 @@
 /* ==UserStyle==
 @name         kill recommended channels
 @description  for when you think it's a waste of space
-@version      1.0
+@version      1.1
 
 @author     macimas (https://macimas.github.io)
 @namespace  https://github.com/macimas
 ==/UserStyle== */
 
 @-moz-document domain("www.youtube.com") {
-	#page.home .branded-page-v2-secondary-col,
-	.branded-page-v2-secondary-col:not(:has(.branded-page-related-channels.yt-card:nth-child(2))),
-	.branded-page-v2-secondary-col:has(.branded-page-related-channels.yt-card:nth-child(2)) .branded-page-related-channels.yt-card:nth-child(2)
+	.branded-page-v2-secondary-col:not(:has(.branded-page-related-channels:nth-child(2))),
+	.branded-page-v2-secondary-col:has(.branded-page-related-channels:nth-child(2)) .branded-page-related-channels:last-child
 	{ display: none }
 }
