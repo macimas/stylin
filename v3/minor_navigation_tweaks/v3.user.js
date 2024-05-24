@@ -182,7 +182,7 @@ window.addEventListener("keydown", event => {
         hk_helper_container.classList.toggle("mdt2-hk-helper-container-hidden");
     }
 
-    const toggle_guide_button = document.querySelector("#yt-masthead #appbar-guide-button");
+    const toggle_guide_button = document.querySelector("#yt-masthead #appbar-guide-button, .guide-module-toggle");
     const search_bar = document.querySelector("#masthead-search-term");
 
     if (search_bar && document.activeElement != search_bar && event.code == "Slash" && !event.shiftKey) {
