@@ -3,7 +3,7 @@
 // @namespace    https://github.com/macimas
 // @version      1.0
 
-// @description  navi tweaki
+// @description  yep!
 // @author       macimas (https://macimas.github.io)
 
 // @match        www.youtube.com/*
@@ -43,7 +43,7 @@ const hk_helper_template = {
     },
     "Site navigation": {
         "Focus search bar": "[/]",
-        "Toggle guide": "[Q]",
+        "Toggle guide": "[Z]",
         "Show keyboard shortcuts": "[Shift] + [?]"
     }
 }
@@ -125,16 +125,27 @@ const css = `
         overflow-y: auto;
 
         display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
 
         width: auto;
         height: 90vh;
     }
 
+    .mdt2-hk-helper-content.yt-card::after {
+        content: "wip. very goofy";
+        position: absolute;
+        bottom: 16px;
+        right: 16px;
+        font-size: 32px;
+    }
+
     .mdt2-hk-helper-close-button {
         position: absolute;
         right: 16px;
+    }
+
+    .mdt2-hk-helper-content h1 {
+        margin-bottom: 6px;
+        margin-left: 6px;
     }
 
     .mdt2-hk-helper-content > div {
@@ -146,7 +157,11 @@ const css = `
         justify-content: space-between;
         gap: 12px;
 
-        margin: 12px 0;
+        padding: 6px;
+    }
+
+    .mdt2-hk-helper-item-container:nth-child(even) {
+        background: #0005;
     }
 
     .mdt2-hk-helper-item-hk {
@@ -161,6 +176,8 @@ style.type = "text/css";
 spitfire.append(style);
 
 window.addEventListener("keydown", event => {
+    const player = document.querySelector("#movie_player");
+
     if (event.code == "Slash" && event.shiftKey) {
         hk_helper_container.classList.toggle("mdt2-hk-helper-container-hidden");
     }
@@ -173,12 +190,11 @@ window.addEventListener("keydown", event => {
         search_bar.focus();
     }
 
-    if (toggle_guide_button && document.activeElement == document.body && event.code == "KeyQ") {
+    if (toggle_guide_button && (document.activeElement == document.body || document.activeElement == player) && event.code == "KeyZ") {
         event.preventDefault();
         toggle_guide_button.click();
     }
 
-    const player = document.querySelector("#movie_player");
     const play_button = document.querySelector(".ytp-button-play");
 
     if (event.code == "ArrowUp" || event.code == "ArrowDown") return;
