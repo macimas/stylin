@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         minor navigation tweaks
 // @namespace    https://github.com/macimas
-// @version      1.0
+// @version      1.1
 
 // @description  yep!
 // @author       macimas (https://macimas.github.io)
@@ -19,7 +19,6 @@ const hk_helper_template = {
         "Toggle mute": "[M]",
         "Toggle theater": "[T]",
         "Toggle fullscreen": "[F]",
-        "Toggle subtitles": "[C]",
 
         "Raise volume": "[ArrowUp]<br>(if player is focused)",
         "Lower volume": "[ArrowDown]<br>(if player is focused)",
@@ -30,12 +29,19 @@ const hk_helper_template = {
         "Seek back 10 seconds": "[J]",
         "Seek forward 1 frame": "[>]",
         "Seek back 1 frame": "[<]",
-        "Seek to 0% - 90%": "[0] to [9]",
+        "Seek to 0% - 90%": "[0] .. [9]",
         "Seek to start": "[Home]",
         "Seek to end": "[End]",
 
         "Increase playback speed": "[Shift] + [>]",
         "Decrease playback speed": "[Shift] + [<]"
+    },
+    "Subtitle controls": {
+        "Toggle subtitles": "[C]",
+        "Rotate through text opacities": "[O]",
+        "Rotate through window opacities": "[W]",
+        "Increase font size": "[+]",
+        "Decrease font size": "[-]",
     },
     "Playlist controls": {
         "Next": "[Shift] + [N]",
@@ -51,19 +57,37 @@ const hk_helper_template = {
 const hk_helper_container = document.createElement("div");
 hk_helper_container.classList = "mdt2-hk-helper-container mdt2-hk-helper-container-hidden";
 
-const hk_helper_content = document.createElement("div");
-hk_helper_content.classList = "mdt2-hk-helper-content yt-card";
-
-hk_helper_container.append(hk_helper_content);
-spitfire.append(hk_helper_container);
+const hk_helper_body = document.createElement("div");
+hk_helper_body.classList = "mdt2-hk-helper-body yt-card";
 
 const hk_helper_close_button = document.createElement("button");
 hk_helper_close_button.innerText = "[x]";
 hk_helper_close_button.classList = "mdt2-hk-helper-close-button";
-hk_helper_content.append(hk_helper_close_button);
+
+const hk_helper_header = document.createElement("h1");
+hk_helper_header.innerText = "Keyboard shortcuts";
+
+const hk_helper_items = document.createElement("div");
+hk_helper_items.classList = "mdt2-hk-helper-items";
+
+hk_helper_container.append(hk_helper_body);
+spitfire.append(hk_helper_container);
+hk_helper_body.append(hk_helper_close_button);
+hk_helper_body.append(hk_helper_header);
+hk_helper_body.append(hk_helper_items);
+
+function hk_helper_hide(method) {
+    hk_helper_container.classList[method]("mdt2-hk-helper-container-hidden")
+}
 
 hk_helper_close_button.addEventListener("click", () => {
-    hk_helper_container.classList.add("mdt2-hk-helper-container-hidden");
+    hk_helper_hide("add");
+});
+
+hk_helper_container.addEventListener("click", event => {
+    if (event.target == hk_helper_container) {
+        hk_helper_hide("add");
+    }
 });
 
 for (const section in hk_helper_template) {
@@ -74,7 +98,7 @@ for (const section in hk_helper_template) {
     const header = document.createElement("h1");
     header.innerText = section_label;
     container.append(header);
-    hk_helper_content.append(container);
+    hk_helper_items.append(container);
 
     for (const item in section_items) {
         const item_label = item;
@@ -119,23 +143,26 @@ const css = `
         background: #000a;
     }
 
-    .mdt2-hk-helper-content {
+    .mdt2-hk-helper-body {
         position: relative;
 
         overflow-y: auto;
 
-        display: flex;
+        padding: 16px;
 
-        width: auto;
+        width: fit-content;
         height: 90vh;
+
+        background: var(--color-e5, #fff);
     }
 
-    .mdt2-hk-helper-content.yt-card::after {
-        content: "wip. very goofy";
+    .mdt2-hk-helper-body::after {
+        content: "very wip";
+        font-size: 21px;
+
         position: absolute;
         bottom: 16px;
         right: 16px;
-        font-size: 32px;
     }
 
     .mdt2-hk-helper-close-button {
@@ -143,13 +170,25 @@ const css = `
         right: 16px;
     }
 
-    .mdt2-hk-helper-content h1 {
-        margin-bottom: 6px;
-        margin-left: 6px;
+    .mdt2-hk-helper-body > h1 {
+        font-size: 21px;
     }
 
-    .mdt2-hk-helper-content > div {
+    .mdt2-hk-helper-items {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+
+        max-height: 100%;
+        min-width: 520px;
+    }
+
+    .mdt2-hk-helper-items > div {
         margin: 16px;
+    }
+
+    .mdt2-hk-helper-items h1 {
+        margin-bottom: 6px;
     }
 
     .mdt2-hk-helper-item-container {
@@ -157,11 +196,11 @@ const css = `
         justify-content: space-between;
         gap: 12px;
 
-        padding: 6px;
+        padding: 6px 0px;
     }
 
-    .mdt2-hk-helper-item-container:nth-child(even) {
-        background: #0005;
+    .mdt2-hk-helper-item-container {
+        border-top: 1px solid var(--color-bf, #0003);
     }
 
     .mdt2-hk-helper-item-hk {
@@ -170,43 +209,60 @@ const css = `
 `;
 
 const style = document.createElement("style");
-style.innerText = css;
+style.innerHTML = css;
 style.id = "mdt2-hk-helper";
 style.type = "text/css";
 spitfire.append(style);
 
 window.addEventListener("keydown", event => {
     const player = document.querySelector("#movie_player");
+    const play_button = document.querySelector(".ytp-button-play");
+    const search_bar = document.querySelector("#masthead-search-term");
 
-    if (event.code == "Slash" && event.shiftKey) {
-        hk_helper_container.classList.toggle("mdt2-hk-helper-container-hidden");
+    const on_body = document.activeElement == document.body;
+    const on_player = document.activeElement == player || document.activeElement == play_button;
+    const on_search_bar = document.activeElement == search_bar;
+    const is_focused = (on_body || on_player);
+
+    if (is_focused && event.code == "Slash" && event.shiftKey) {
+        event.preventDefault();
+        return hk_helper_hide("toggle");
     }
 
     const toggle_guide_button = document.querySelector("#yt-masthead #appbar-guide-button, .guide-module-toggle");
-    const search_bar = document.querySelector("#masthead-search-term");
 
-    if (search_bar && document.activeElement != search_bar && event.code == "Slash" && !event.shiftKey) {
+    if (is_focused && search_bar && !on_search_bar && event.code == "Slash") {
         event.preventDefault();
-        search_bar.focus();
+        return search_bar.focus();
     }
 
-    if (toggle_guide_button && (document.activeElement == document.body || document.activeElement == player) && event.code == "KeyZ") {
+    if (is_focused && toggle_guide_button && event.code == "KeyZ") {
         event.preventDefault();
         toggle_guide_button.click();
     }
 
-    const play_button = document.querySelector(".ytp-button-play");
+    if (event.code == "ArrowUp" || event.code == "ArrowDown") {
+        return;
+    }
 
-    if (event.code == "ArrowUp" || event.code == "ArrowDown") return;
+    if (is_focused && event.code == "Escape") {
+        hk_helper_hide("add");
+    }
 
-    if (player && document.activeElement == document.body) {
-        player.focus();
+    if (player) {
+        if (on_body && event.code != "Escape") {
+            player.focus();
+        }
+
+        if (on_player && event.code == "Escape") {
+            return player.blur();
+        }
     }
 
     const theater_button = document.querySelector("div.ytp-size-toggle-small, div.ytp-size-toggle-large");
     const theater_button_is_upsell = document.querySelector("#upsell-video .ytp-size-toggle-large");
 
-    if (theater_button && event.code == "KeyT") {
+    if (is_focused && theater_button && event.code == "KeyT") {
         theater_button.click();
 
         if (theater_button_is_upsell) {
@@ -217,11 +273,11 @@ window.addEventListener("keydown", event => {
     const playlist_bar_prev = document.querySelector("#watch7-playlist-bar-controls .yt-uix-button-icon-playlist-bar-prev");
     const playlist_bar_next = document.querySelector("#watch7-playlist-bar-controls .yt-uix-button-icon-playlist-bar-next");
 
-    if (playlist_bar_prev && event.code == "KeyP" && event.shiftKey) {
+    if (is_focused && playlist_bar_prev && event.code == "KeyP" && event.shiftKey) {
         playlist_bar_prev.click();
     }
 
-    if (playlist_bar_next && event.code == "KeyN" && event.shiftKey) {
+    if (is_focused && playlist_bar_next && event.code == "KeyN" && event.shiftKey) {
         playlist_bar_next.click();
     }
 });
