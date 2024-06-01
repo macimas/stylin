@@ -1,274 +1,359 @@
 /* ==UserStyle==
 @name         semi-better vordebugger
 @description  an attempt to improve the vordebugger's config page
-@version      1.3
+@version      1.4
 
 @author     macimas (https://macimas.github.io)
 @namespace  https://github.com/macimas
 
 @preprocessor stylus
 
+@var  checkbox  expander-on-bottom  "Expander on bottom"  1
+@var  checkbox  darker-expander  "Darker expander (for dark mode)"  0
+
+@var  checkbox  tweak-startube      "Tweaks for StarTube"           1
+@var  checkbox  tweak-startube-win  "^ Also tweak settings window"  1
+
 @var  text  vordebugger-width   "Vordebugger width"   "480px"
 @var  text  vordebugger-height  "Vordebugger height"  "calc(100vh - 64px)"
 ==/UserStyle== */
 
 @-moz-document domain("www.youtube.com") {
-    icons = url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAABUCAYAAACLOrcbAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAImSURBVHgB7VdBUsIwFP2NHQZ33kA5gbhzw0w5geMJHE4gW2BBHRhgp5xAt+7wBPQIvQE9Au6EBfX/kkga0lII2pHpmwlpk/73f35+/ifWcDgMwQAMDGFMYAxLPKT5otVqWeo8jVFvvAQ764dC48EESUuw1YF9kdmJSXPGSziBXcj/LOQPq8hIeh/oMlASfu8sZM0PmS3AJXWpHUTABV1qKslOAklYIEbC9hB+4i1GkujEwWDQlIXRqS4npS4ixm8+Ey2wLGuCXSALE/gzWRLQN4kE+GGwWCxuZGGZhM8F8P8RheuhSYXCPf+EcgIE+aOIgyIOtOj1es5oNHrG2Jiqczh2pY79pHXXdS/K5XI3DMMmNlitVg0N/wNsakMEJoRLpdKUhKU5X6OdCoqzRUCaMcdX5YlOp+MrwmJJr/JSGL0ommPgFWqGTQhRP+PjwFBzVyfY7/cvqW+32y/YVWBdpYD3FT4ODLVXdQSMsXvxzCuQcGpdrkjkAy0BWnYnv6OQB+s6GcQUQTIcsU4Jb1uK0Imyg1TMMR7q8o6oIAs+IBkX6IupxpKYBQ5s9jgNAVpDUejLFomcSFvyCPthjA5tRk7EPwsuKKGbBtx6n8vAGf14nvdVq9Xebds+x9fbHfLj5XLZwPMzB5AungLi0GC7hk2MBLB29oTHQwEJqX/ps9TM4104hDbdRSPt8mFugbrONEt0PjG2wErTnMWa41mgw5/EwQngG/hTCnQFd4DlAAAAAElFTkSuQmCC")
+	icons = url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAABUCAYAAACLOrcbAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAImSURBVHgB7VdBUsIwFP2NHQZ33kA5gbhzw0w5geMJHE4gW2BBHRhgp5xAt+7wBPQIvQE9Au6EBfX/kkga0lII2pHpmwlpk/73f35+/ifWcDgMwQAMDGFMYAxLPKT5otVqWeo8jVFvvAQ764dC48EESUuw1YF9kdmJSXPGSziBXcj/LOQPq8hIeh/oMlASfu8sZM0PmS3AJXWpHUTABV1qKslOAklYIEbC9hB+4i1GkujEwWDQlIXRqS4npS4ixm8+Ey2wLGuCXSALE/gzWRLQN4kE+GGwWCxuZGGZhM8F8P8RheuhSYXCPf+EcgIE+aOIgyIOtOj1es5oNHrG2Jiqczh2pY79pHXXdS/K5XI3DMMmNlitVg0N/wNsakMEJoRLpdKUhKU5X6OdCoqzRUCaMcdX5YlOp+MrwmJJr/JSGL0ommPgFWqGTQhRP+PjwFBzVyfY7/cvqW+32y/YVWBdpYD3FT4ODLVXdQSMsXvxzCuQcGpdrkjkAy0BWnYnv6OQB+s6GcQUQTIcsU4Jb1uK0Imyg1TMMR7q8o6oIAs+IBkX6IupxpKYBQ5s9jgNAVpDUejLFomcSFvyCPthjA5tRk7EPwsuKKGbBtx6n8vAGf14nvdVq9Xebds+x9fbHfLj5XLZwPMzB5AungLi0GC7hk2MBLB29oTHQwEJqX/ps9TM4104hDbdRSPt8mFugbrONEt0PjG2wErTnMWa41mgw5/EwQngG/hTCnQFd4DlAAAAAElFTkSuQmCC")
 
-    :root {
-        /* ah yes, blue can be red */
-        /* for DARK_MOD compat stuff. you probably dont need to touch this */
-        --var-red: var(--default-red, #d14836);
-        --var-blue: var(--default-blue, var(--var-red));
-    }
+	dark-mode = ".css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss"
 
-    #vor_debugger_container
-    { z-index: 2000000000 }
+	:root {
+		/* ah yes, blue can be red */
+		/* for DARK_MOD compat stuff. you probably dont need to touch this */
+		--var-red: var(--default-red, #d14836);
+		--var-blue: var(--default-blue, var(--var-red));
+	}
+	
+	if (tweak-startube) {
+		if (tweak-startube-win) {
+			#st-settings-dd-fence
+			{ z-index: 20000000000 }
+		}
 
-    .vdbg-titlebar
-    { flex-shrink: 0 }
+		#startube13-settings {
+			z-index: 1;
+		
+			position: absolute;
+			bottom: 0px;
+			right: 10px;
+			
+			border-top: unset;
+		}
+		
+		#startube13-settings, #startube13-settings button
+		{ height: 40px }
+		
+		#st-settings-button .yt-uix-button-content
+		{ display: none }
+		
+		#st-settings-button {
+			display: flex;
+			align-items: center;
+			gap: 5px;
+			
+			padding: 9px;
+		}
+		
+		#st-settings-button::before {
+			content: "★";
+			font-size: 20px;
+			line-height: 1;
+		}
+		
+		#st-settings-button::after {
+			all: unset;
+			
+			content: "StarTube";
+			text-transform: none;
+			line-height: 1;
+		}
+		
+		#startube13-settings:hover,
+		html:has(#startube13-settings-window:not(.hid)) #startube13-settings {
+			box-sizing: border-box;
+			border-bottom: 2px solid #d19807;
+		}
+		
+		#startube13-settings:hover #st-settings-button,
+		html:has(#startube13-settings-window:not(.hid)) #st-settings-button
+		{ color: #d19807 }
+		
+		/* tweaks for dark mode */
+		html:has({dark-mode}) {
+			& #startube13-settings:hover,
+			&:has(#startube13-settings-window:not(.hid)) #startube13-settings
+			{ border-bottom: 2px solid #f7d190 }
 
-    .vordebugger .default-text-red
-    { color: var(--var-red) }
+			& #st-settings-button
+			{ color: var(--color-666) }
 
-    .vordebugger.expanded {
-        display: flex;
-        flex-direction: column-reverse;
-        
-        margin-right: 0px;
-        
-        width: vordebugger-width;
-        max-height: vordebugger-height;
-    }
+			& #startube13-settings:hover #st-settings-button,
+			&:has(#startube13-settings-window:not(.hid)) #st-settings-button
+			{ color: #f7d190 }
+		}
+	}
 
-    .vordebugger.expanded .vdbg-content {
-        display: flex;
-        flex-direction: column;
-        
-        border-width: 1px;
-    }
+	#vor_debugger_container
+	{ z-index: 2000000000 }
 
-    .vdbg-content .ddd-build-info {
-        padding: 7px 10px;
-        
-        color: var(--color-black-text, #000);
-        background: transparent;
-    }
+	.vordebugger .default-text-red
+	{ color: var(--var-red) }
 
-    .vor_smartnav, .vordebugger .smartnav, .vordebugger .smartnav_slotlist {
-        overflow: hidden;
-        display: flex;
-    }
-    
-    .smartnav, .smartnav_slotlist, .smartadd.selected
-    { width: 100% }
+	.vordebugger.expanded {
+		display: flex;
+		
+		margin-right: 0px;
+		
+		width: vordebugger-width;
+		max-height: vordebugger-height;
+	}
+	
+	if (expander-on-bottom) {
+		.vordebugger.expanded
+		{ flex-direction: column-reverse }
+	} else {
+		.vordebugger.expanded
+		{ flex-direction: column }
+	}
 
-    .vordebugger .smartnav_slotlist {
-        overflow-y: auto;
-        
-        margin-bottom: 40px;
-    }
+	.vordebugger .vdbg-titlebar
+	{ flex-shrink: 0 }
 
-    .vordebugger .smartnav_slotlist::after {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        content: " ";
+	if (darker-expander) {
+		html:has({dark-mode}) .vordebugger .vdbg-titlebar {
+			background-image: linear-gradient(to bottom, var(--color-ccc) 0, var(--color-e5) 100%);
+			height: 35px;
+			color: white;
+			width: 100%;
+		}
+	}
 
-        height: 40px;
-        
-        background: var(--color-fff, transparent)
-    }
+	.vordebugger.expanded .vdbg-content {
+		display: flex;
+		flex-direction: column;
+		
+		border-width: 1px;
+		border-bottom-width: 0px;
+	}
 
-    .vordebugger .smartadd_title
-    { z-index: 1 }
+	.vdbg-content .ddd-build-info {
+		padding: 7px 10px;
+		
+		color: var(--color-black-text, #000);
+		background: transparent;
+		border-bottom: 1px solid var(--color-ddd, #ddd);
+	}
 
-    .internal-config.goog-scrollbar {
-        padding: 10px
-    }
+	.vor_smartnav, .vordebugger .smartnav, .vordebugger .smartnav_slotlist {
+		overflow: hidden;
+		display: flex;
+	}
+	
+	.smartnav, .smartnav_slotlist, .smartadd.selected
+	{ width: 100% }
 
-    .vordebugger .internal-config-section.outside
-    { position: relative }
+	.vordebugger .smartnav_slotlist {
+		overflow-y: auto;
+		
+		margin-bottom: 40px;
+	}
 
-    .vordebugger .yt-uix-form-input-checkbox-container {
-        margin-right: 5px;
-    }
+	.vordebugger .smartnav_slotlist::after {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		content: " ";
 
-    .vordebugger .logview-title {
-        cursor: default;
-        
-        color: var(--var-blue);
-    }
+		height: 40px;
+		
+		background: var(--color-fff, transparent);
+		border-top: 1px solid var(--color-b8, #e6e6e6);
+	}
 
-    .vordebugger .logview-title-expander
-    { border-top-color: var(--var-blue) }
+	.vordebugger .smartadd_title {
+		z-index: 1;
+		color: var(--color-666, #666);
+	}
 
-    .vordebugger .logview-title, .vordebugger .logview-subtitle
-    { width: auto }
+	.internal-config.goog-scrollbar
+	{ padding: 10px }
 
-    .vordebugger .logview-stream, .vordebugger .internal-config
-    { max-height: none }
+	.vordebugger .internal-config-section.outside
+	{ position: relative }
 
-    .vordebugger .internal-config-section + .internal-config-section
-    { border-color: var(--color-ddd, #ddd) }
+	.vordebugger .yt-uix-form-input-checkbox-container {
+		margin-right: 5px;
+	}
 
-    .vordebugger .internal-config-section .internal-config-section-title {
-        display: flex;
-        
-        flex-direction: row-reverse;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 13px;
-        
-        margin-left: -5px;
-        
-        text-transform: none;
-    }
-    
-    .vordebugger .internal-config {
-        display: flex;
-        flex-direction: column;
-    }
+	.vordebugger .logview-title {
+		cursor: default;
+		
+		color: var(--var-blue);
+	}
 
-    .vordebugger .internal-setting
-    { line-break: anywhere }
+	.vordebugger .logview-title-expander
+	{ border-top-color: var(--var-blue) }
 
-    .vordebugger .internal-setting-description {
-        margin-bottom: 8px;
-        margin-left: 23px;
-        
-        max-width: none;
-    }
-    
-    .logview-extra-buttons {
-        margin-top: unset;
-    }
-    
-    .logview-extra-buttons button {
-        margin-top: 5px;
-    }
-    
-    .mdt2-vdbg-config-search-bar {
-        margin-bottom: 8px;
-        
-        width: unset;
-    }
-    
-    .mdt2-vdbg-subtitle {
-        color: var(--color-555, #555);
-        font-size: 12px;
-        line-height: 15px;
-        margin-left: 1px;
-    }
-    
-    .mdt2-vdbg-margin-bottom {
-        margin-bottom: 10px;
-    }
-    
-    .mdt2-vdbg-import-config-dialog-container {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        
-        background: #000a;
-    }
-    
-    .mdt2-vdbg-import-config-exit-button {
-        position: absolute;
-        top: 5px;
-        right: 10px;
-    }
-    
-    .mdt2-vdbg-import-config-dialog {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        
-        transform: translate(-50%, -50%);
-        
-        padding: 16px;
-        
-        background: var(--color-e5, #fff)
-    }
-    
-    .mdt2-vdbg-import-config-dialog input {
-        font-size: 12px;
-    }
-    
-    .mdt2-vdbg-import-config-hidden
-    { display: none }
-    
-    .mdt2-vdbg-presets-section {
-        padding: 10px;
-        
-        border-bottom: 1px solid var(--color-b8, #e6e6e6)
-    }
-    
-    .mdt2-vdbg-presets-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 5px;
-    }
-    
-    .mdt2-vdbg-preset-item {
-        flex-grow: 1;
-    
-        padding: 5px 10px;
-        
-        border: 1px solid var(--color-b8, #dbdbdb);
-    }
-    
-    .mdt2-vdbg-preset-item-label {
-        width: 100%;
-    }
-    
-    .mdt2-vdbg-preset-item-icon {
-        display: inline-block;
-        
-        -webkit-transform: translateY(3px);
+	.vordebugger .logview-title, .vordebugger .logview-subtitle
+	{ width: auto }
 
-        margin-right: 5px;
-    
-        width: 16px;
-        height: 16px;
-    }
-    
-    .mdt2-vdbg-preset-item-icon-centered-layout {
-        background: no-repeat icons;
-    }
+	.vordebugger .logview-stream, .vordebugger .internal-config
+	{ max-height: none }
 
-    .mdt2-vdbg-preset-item-icon-appbar-fusion {
-        background: no-repeat icons 0 -17px;
-    }
-    
-    .mdt2-vdbg-preset-item-icon-cardification,
-    .mdt2-vdbg-preset-item-icon-watch8 {
-        background: no-repeat icons 0 -34px;
-    }
-    
-    .mdt2-vdbg-preset-item-icon-dark-mode {
-        background: no-repeat icons 0 -51px;
-    }
-    
-    .mdt2-vdbg-preset-item-icon-gbar {
-        background: no-repeat icons 0 -68px;
-    }
-    
-    .mdt2-vdbg-preset-item-buttons {
-        display: flex;
-        justify-content: flex-end;
-        
-        margin-top: 2px;
-    }
-    
-    .mdt2-vdbg-preset-item-buttons .jfk-button {
-        min-width: 24px;
-    }
-    
-    .mdt2-vdbg-preset-item-buttons .jfk-button-default {
-        margin-right: 5px;
-    }
+	.vordebugger .internal-config-section + .internal-config-section
+	{ border-color: var(--color-ddd, #ddd) }
+
+	.vordebugger .internal-config-section .internal-config-section-title {
+		display: flex;
+		
+		flex-direction: row-reverse;
+		justify-content: flex-end;
+		align-items: center;
+		gap: 13px;
+		
+		margin-left: -5px;
+		
+		text-transform: none;
+	}
+	
+	.vordebugger .internal-config {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.vordebugger .internal-setting
+	{ line-break: anywhere }
+
+	.vordebugger .internal-setting-description {
+		margin-bottom: 8px;
+		margin-left: 23px;
+
+		max-width: none;
+	}
+
+	.logview-extra-buttons
+	{ margin-top: unset }
+
+	.logview-extra-buttons button
+	{ margin-top: 5px }
+
+	.mdt2-vdbg-config-search-bar {
+		margin-bottom: 8px;
+		
+		width: unset;
+	}
+	
+	.mdt2-vdbg-subtitle {
+		color: var(--color-555, #555);
+		font-size: 12px;
+		line-height: 15px;
+		margin-left: 1px;
+	}
+	
+	.mdt2-vdbg-margin-bottom
+	{ margin-bottom: 10px }
+	
+	.mdt2-vdbg-import-config-dialog-container {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		
+		background: #000a;
+	}
+	
+	.mdt2-vdbg-import-config-exit-button {
+		position: absolute;
+		top: 5px;
+		right: 10px;
+	}
+	
+	.mdt2-vdbg-import-config-dialog {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		
+		transform: translate(-50%, -50%);
+		
+		padding: 16px;
+		
+		background: var(--color-e5, #fff)
+	}
+	
+	.mdt2-vdbg-import-config-dialog input
+	{ font-size: 12px }
+	
+	.mdt2-vdbg-import-config-hidden
+	{ display: none }
+	
+	.mdt2-vdbg-presets-section {
+		padding: 10px;
+		
+		border-bottom: 1px solid var(--color-b8, #e6e6e6)
+	}
+	
+	.mdt2-vdbg-presets-container {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 5px;
+	}
+	
+	.mdt2-vdbg-preset-item {
+		flex-grow: 1;
+	
+		padding: 5px 10px;
+		
+		border: 1px solid var(--color-b8, #dbdbdb);
+	}
+	
+	.mdt2-vdbg-preset-item-label
+	{ width: 100% }
+	
+	.mdt2-vdbg-preset-item-icon {
+		display: inline-block;
+		
+		-webkit-transform: translateY(3px);
+
+		margin-right: 5px;
+	
+		width: 16px;
+		height: 16px;
+	}
+	
+	.mdt2-vdbg-preset-item-icon-centered-layout
+	{ background: no-repeat icons }
+
+	.mdt2-vdbg-preset-item-icon-appbar-fusion
+	{ background: no-repeat icons 0 -17px }
+	
+	.mdt2-vdbg-preset-item-icon-cardification,
+	.mdt2-vdbg-preset-item-icon-watch8
+	{ background: no-repeat icons 0 -34px }
+	
+	.mdt2-vdbg-preset-item-icon-dark-mode
+	{ background: no-repeat icons 0 -51px }
+	
+	.mdt2-vdbg-preset-item-icon-gbar
+	{ background: no-repeat icons 0 -68px }
+	
+	.mdt2-vdbg-preset-item-buttons {
+		display: flex;
+		justify-content: flex-end;
+		
+		margin-top: 2px;
+	}
+	
+	.mdt2-vdbg-preset-item-buttons .jfk-button
+	{ min-width: 24px }
+	
+	.mdt2-vdbg-preset-item-buttons .jfk-button-default
+	{ margin-right: 5px }
 }
