@@ -59,6 +59,9 @@
         overflow: hidden;
         display: flex;
     }
+    
+    .smartnav, .smartnav_slotlist, .smartadd.selected
+    { width: 100% }
 
     .vordebugger .smartnav_slotlist {
         overflow-y: auto;
