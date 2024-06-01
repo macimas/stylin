@@ -8,7 +8,7 @@
 
 @preprocessor stylus
 
-@var  text  vordebugger-width   "Vordebugger width"   "400px"
+@var  text  vordebugger-width   "Vordebugger width"   "480px"
 @var  text  vordebugger-height  "Vordebugger height"  "calc(100vh - 64px)"
 ==/UserStyle== */
 
