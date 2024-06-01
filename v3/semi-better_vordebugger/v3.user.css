@@ -1,18 +1,20 @@
 /* ==UserStyle==
 @name         semi-better vordebugger
-@description  an attempt to improve the vordebugger, with my personal preference
-@version      1.2
+@description  an attempt to improve the vordebugger's config page
+@version      1.3
 
 @author     macimas (https://macimas.github.io)
 @namespace  https://github.com/macimas
 
-@preprocessor default
+@preprocessor stylus
 
-@var  text  mdt2-vordebugger-width   "Vordebugger width"   400px
-@var  text  mdt2-vordebugger-height  "Vordebugger height"  calc(100vh - 64px)
+@var  text  vordebugger-width   "Vordebugger width"   "400px"
+@var  text  vordebugger-height  "Vordebugger height"  "calc(100vh - 64px)"
 ==/UserStyle== */
 
 @-moz-document domain("www.youtube.com") {
+    icons = url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAABUCAYAAACLOrcbAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAImSURBVHgB7VdBUsIwFP2NHQZ33kA5gbhzw0w5geMJHE4gW2BBHRhgp5xAt+7wBPQIvQE9Au6EBfX/kkga0lII2pHpmwlpk/73f35+/ifWcDgMwQAMDGFMYAxLPKT5otVqWeo8jVFvvAQ764dC48EESUuw1YF9kdmJSXPGSziBXcj/LOQPq8hIeh/oMlASfu8sZM0PmS3AJXWpHUTABV1qKslOAklYIEbC9hB+4i1GkujEwWDQlIXRqS4npS4ixm8+Ey2wLGuCXSALE/gzWRLQN4kE+GGwWCxuZGGZhM8F8P8RheuhSYXCPf+EcgIE+aOIgyIOtOj1es5oNHrG2Jiqczh2pY79pHXXdS/K5XI3DMMmNlitVg0N/wNsakMEJoRLpdKUhKU5X6OdCoqzRUCaMcdX5YlOp+MrwmJJr/JSGL0ommPgFWqGTQhRP+PjwFBzVyfY7/cvqW+32y/YVWBdpYD3FT4ODLVXdQSMsXvxzCuQcGpdrkjkAy0BWnYnv6OQB+s6GcQUQTIcsU4Jb1uK0Imyg1TMMR7q8o6oIAs+IBkX6IupxpKYBQ5s9jgNAVpDUejLFomcSFvyCPthjA5tRk7EPwsuKKGbBtx6n8vAGf14nvdVq9Xebds+x9fbHfLj5XLZwPMzB5AungLi0GC7hk2MBLB29oTHQwEJqX/ps9TM4104hDbdRSPt8mFugbrONEt0PjG2wErTnMWa41mgw5/EwQngG/hTCnQFd4DlAAAAAElFTkSuQmCC")
+
     :root {
         /* ah yes, blue can be red */
         /* for DARK_MOD compat stuff. you probably dont need to touch this */
@@ -35,8 +37,8 @@
         
         margin-right: 0px;
         
-        width: var(--mdt2-vordebugger-width);
-        max-height: var(--mdt2-vordebugger-height);
+        width: vordebugger-width;
+        max-height: vordebugger-height;
     }
 
     .vordebugger.expanded .vdbg-content {
@@ -79,15 +81,15 @@
     .vordebugger .smartadd_title
     { z-index: 1 }
 
-    .vordebugger .smartadd_content
-    { width: var(--mdt2-vordebugger-width)}
+    .internal-config.goog-scrollbar {
+        padding: 10px
+    }
 
     .vordebugger .internal-config-section.outside
     { position: relative }
 
     .vordebugger .yt-uix-form-input-checkbox-container {
-        margin-left: -3px;
-        margin-right: 6px;
+        margin-right: 5px;
     }
 
     .vordebugger .logview-title {
@@ -101,7 +103,6 @@
 
     .vordebugger .logview-title, .vordebugger .logview-subtitle
     { width: auto }
-
 
     .vordebugger .logview-stream, .vordebugger .internal-config
     { max-height: none }
@@ -121,6 +122,11 @@
         
         text-transform: none;
     }
+    
+    .vordebugger .internal-config {
+        display: flex;
+        flex-direction: column;
+    }
 
     .vordebugger .internal-setting
     { line-break: anywhere }
@@ -130,5 +136,136 @@
         margin-left: 23px;
         
         max-width: none;
+    }
+    
+    .logview-extra-buttons {
+        margin-top: unset;
+    }
+    
+    .logview-extra-buttons button {
+        margin-top: 5px;
+    }
+    
+    .mdt2-vdbg-config-search-bar {
+        margin-bottom: 8px;
+        
+        width: unset;
+    }
+    
+    .mdt2-vdbg-subtitle {
+        color: var(--color-555, #555);
+        font-size: 12px;
+        line-height: 15px;
+        margin-left: 1px;
+    }
+    
+    .mdt2-vdbg-margin-bottom {
+        margin-bottom: 10px;
+    }
+    
+    .mdt2-vdbg-import-config-dialog-container {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        
+        background: #000a;
+    }
+    
+    .mdt2-vdbg-import-config-exit-button {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+    }
+    
+    .mdt2-vdbg-import-config-dialog {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        
+        transform: translate(-50%, -50%);
+        
+        padding: 16px;
+        
+        background: var(--color-e5, #fff)
+    }
+    
+    .mdt2-vdbg-import-config-dialog input {
+        font-size: 12px;
+    }
+    
+    .mdt2-vdbg-import-config-hidden
+    { display: none }
+    
+    .mdt2-vdbg-presets-section {
+        padding: 10px;
+        
+        border-bottom: 1px solid var(--color-b8, #e6e6e6)
+    }
+    
+    .mdt2-vdbg-presets-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    
+    .mdt2-vdbg-preset-item {
+        flex-grow: 1;
+    
+        padding: 5px 10px;
+        
+        border: 1px solid var(--color-b8, #dbdbdb);
+    }
+    
+    .mdt2-vdbg-preset-item-label {
+        width: 100%;
+    }
+    
+    .mdt2-vdbg-preset-item-icon {
+        display: inline-block;
+        
+        -webkit-transform: translateY(3px);
+
+        margin-right: 5px;
+    
+        width: 16px;
+        height: 16px;
+    }
+    
+    .mdt2-vdbg-preset-item-icon-centered-layout {
+        background: no-repeat icons;
+    }
+
+    .mdt2-vdbg-preset-item-icon-appbar-fusion {
+        background: no-repeat icons 0 -17px;
+    }
+    
+    .mdt2-vdbg-preset-item-icon-cardification,
+    .mdt2-vdbg-preset-item-icon-watch8 {
+        background: no-repeat icons 0 -34px;
+    }
+    
+    .mdt2-vdbg-preset-item-icon-dark-mode {
+        background: no-repeat icons 0 -51px;
+    }
+    
+    .mdt2-vdbg-preset-item-icon-gbar {
+        background: no-repeat icons 0 -68px;
+    }
+    
+    .mdt2-vdbg-preset-item-buttons {
+        display: flex;
+        justify-content: flex-end;
+        
+        margin-top: 2px;
+    }
+    
+    .mdt2-vdbg-preset-item-buttons .jfk-button {
+        min-width: 24px;
+    }
+    
+    .mdt2-vdbg-preset-item-buttons .jfk-button-default {
+        margin-right: 5px;
     }
 }
