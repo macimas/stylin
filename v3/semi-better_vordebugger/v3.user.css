@@ -1,15 +1,15 @@
 /* ==UserStyle==
 @name         semi-better vordebugger
 @description  an attempt to improve the vordebugger's config page
-@version      1.4
+@version      1.5
 
 @author     macimas (https://macimas.github.io)
 @namespace  https://github.com/macimas
 
 @preprocessor stylus
 
-@var  checkbox  expander-on-bottom  "Expander on bottom"  1
-@var  checkbox  darker-expander  "Darker expander (for dark mode)"  0
+@var  checkbox  expander-on-bottom  "Expander on bottom"               1
+@var  checkbox  darker-expander     "Darker expander (for dark mode)"  0
 
 @var  checkbox  tweak-startube      "Tweaks for StarTube"           1
 @var  checkbox  tweak-startube-win  "^ Also tweak settings window"  1
@@ -122,11 +122,20 @@
 		{ flex-direction: column }
 	}
 
-	.vordebugger .vdbg-titlebar
-	{ flex-shrink: 0 }
+	if (true) {
+		.vdbg-titlebar {
+			flex-shrink: 0;
+			display: flex;
+			justify-content: space-between;
+		}
+		
+		.vdbg-titlebar-actions {
+			padding-right: 15px;
+		}
+	}
 
 	if (darker-expander) {
-		html:has({dark-mode}) .vordebugger .vdbg-titlebar {
+		html:has({dark-mode}) .vdbg-titlebar {
 			background-image: linear-gradient(to bottom, var(--color-ccc) 0, var(--color-e5) 100%);
 			height: 35px;
 			color: white;
@@ -150,7 +159,7 @@
 		border-bottom: 1px solid var(--color-ddd, #ddd);
 	}
 
-	.vor_smartnav, .vordebugger .smartnav, .vordebugger .smartnav_slotlist {
+	.vor_smartnav, .smartnav, .smartnav_slotlist {
 		overflow: hidden;
 		display: flex;
 	}
@@ -158,13 +167,13 @@
 	.smartnav, .smartnav_slotlist, .smartadd.selected
 	{ width: 100% }
 
-	.vordebugger .smartnav_slotlist {
+	.smartnav_slotlist {
 		overflow-y: auto;
 		
 		margin-bottom: 40px;
 	}
 
-	.vordebugger .smartnav_slotlist::after {
+	.smartnav_slotlist::after {
 		position: absolute;
 		bottom: 0;
 		left: 0;
@@ -177,7 +186,7 @@
 		border-top: 1px solid var(--color-b8, #e6e6e6);
 	}
 
-	.vordebugger .smartadd_title {
+	.smartadd_title {
 		z-index: 1;
 		color: var(--color-666, #666);
 	}
@@ -185,7 +194,7 @@
 	.internal-config.goog-scrollbar
 	{ padding: 10px }
 
-	.vordebugger .internal-config-section.outside
+	.internal-config-section.outside
 	{ position: relative }
 
 	.vordebugger .yt-uix-form-input-checkbox-container {
@@ -201,16 +210,16 @@
 	.vordebugger .logview-title-expander
 	{ border-top-color: var(--var-blue) }
 
-	.vordebugger .logview-title, .vordebugger .logview-subtitle
+	.logview-title, .logview-subtitle
 	{ width: auto }
 
-	.vordebugger .logview-stream, .vordebugger .internal-config
+	.logview-stream, .internal-config
 	{ max-height: none }
 
-	.vordebugger .internal-config-section + .internal-config-section
+	.internal-config-section + .internal-config-section
 	{ border-color: var(--color-ddd, #ddd) }
 
-	.vordebugger .internal-config-section .internal-config-section-title {
+	.internal-config-section .internal-config-section-title {
 		display: flex;
 		
 		flex-direction: row-reverse;
@@ -218,24 +227,49 @@
 		align-items: center;
 		gap: 13px;
 		
-		margin-left: -5px;
+		margin-left: -2px;
 		
 		text-transform: none;
 	}
 	
-	.vordebugger .internal-config {
+	.internal-config-section:not(.yt-uix-expander-collapsed) .internal-config-section-title:after
+	{ top: -4px }
+	
+	.internal-config {
 		display: flex;
 		flex-direction: column;
 	}
 
-	.vordebugger .internal-setting
-	{ line-break: anywhere }
+	.internal-setting {
+		margin-top: 5px;
+		
+		line-break: anywhere;
+	}
+	
+	.internal-config .create-playlist {
+		display: flex;
+		flex-direction: row-reverse;
+		gap: 5px;
+	}
+	
+	.internal-config .create-playlist .playlist-create-form-playlist-name,
+	.internal-config .create-playlist .yt-uix-form-input-container
+	{ width: 100% }
 
-	.vordebugger .internal-setting-description {
-		margin-bottom: 8px;
-		margin-left: 23px;
+	.internal-config .create-playlist .yt-uix-form-input-container
+	{ display: grid }
+	
+	.internal-config .create-playlist input
+	{ width: unset }
+
+	.internal-setting-description {
+		margin-left: 25px;
 
 		max-width: none;
+	}
+	
+	.internal-setting-description:last-child {
+		margin-bottom: 10px;
 	}
 
 	.logview-extra-buttons
@@ -243,12 +277,10 @@
 
 	.logview-extra-buttons button
 	{ margin-top: 5px }
-
-	.mdt2-vdbg-config-search-bar {
-		margin-bottom: 8px;
-		
-		width: unset;
-	}
+	
+	/*
+	** === for userscript ===
+	*/
 	
 	.mdt2-vdbg-subtitle {
 		color: var(--color-555, #555);
@@ -257,8 +289,14 @@
 		margin-left: 1px;
 	}
 	
+	.mdt2-vdbg-margin-top
+	{ margin-top: 10px }
+
 	.mdt2-vdbg-margin-bottom
 	{ margin-bottom: 10px }
+
+	.mdt2-vdbg-import-config-hidden
+	{ display: none }
 	
 	.mdt2-vdbg-import-config-dialog-container {
 		position: absolute;
@@ -272,8 +310,10 @@
 	
 	.mdt2-vdbg-import-config-exit-button {
 		position: absolute;
-		top: 5px;
+		top: 10px;
 		right: 10px;
+		
+		font-size: 13px;
 	}
 	
 	.mdt2-vdbg-import-config-dialog {
@@ -285,14 +325,15 @@
 		
 		padding: 16px;
 		
-		background: var(--color-e5, #fff)
+		background: var(--color-e5, #fff);
+		color: var(--color-666, #666);
 	}
 	
-	.mdt2-vdbg-import-config-dialog input
-	{ font-size: 12px }
+	.mdt2-vdbg-import-config-dialog input {
+		margin-bottom: 5px;
 	
-	.mdt2-vdbg-import-config-hidden
-	{ display: none }
+		font-size: 12px;
+	}
 	
 	.mdt2-vdbg-presets-section {
 		padding: 10px;
@@ -356,4 +397,21 @@
 	
 	.mdt2-vdbg-preset-item-buttons .jfk-button-default
 	{ margin-right: 5px }
+
+	.mdt2-vdbg-config-search-controls {
+		display: flex;
+
+		margin-bottom: 5px;
+
+		height: fit-content;
+	}
+
+	.mdt2-vdbg-config-search-bar {
+		margin-right: 5px;
+	
+		width: 100%;
+	}
+	
+	.mdt2-vdbg-config-search-tags
+	{ padding: 5px 5px 6px }
 }

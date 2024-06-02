@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         semi-better vordebugger
 // @namespace    https://github.com/macimas
-// @version      1.0
+// @version      1.1
 
 // @description  an attempt to improve the vordebugger's config page
 // @author       macimas (https://macimas.github.io)
@@ -63,7 +63,10 @@ const template_presets = [
             at_off: [
                 "MASTHEAD_APPBAR_FUSION",
                 "APPBAR_GUIDE_IS_PART_OF_MASTHEAD_POSITIONER",
-                "SITE_AS_GIANT_CARD"
+                "SITE_AS_GIANT_CARD",
+
+                "CARDIFIED_PAGE",
+                "INDIVIDUAL_CARDS"
             ]
         }
     },
@@ -115,8 +118,19 @@ const template_presets = [
         toggles: {
             default: [
                 "DARK_MOD"
-            ]
-        }
+            ],
+            at_on_confirmation: () => {
+                const startube = document.querySelector("#startube13-settings-window");
+
+                if (startube) {
+                    const confirmation = confirm("StarTube currently does not natively support dark mode. Do you really want to enable?");
+                    return confirmation;
+                }
+
+                return true;
+            }
+        },
+
     }
 ]
 
@@ -177,11 +191,14 @@ function togglePreset(data, value) {
         }
     }
 
-    console.log(toggles.default);
-
     applySettings(toggles.default);
 
-    if (data.toggles.at_off && value == false) {
+    if (toggles.at_on_confirmation && value == true) {
+        const confirmation = toggles.at_on_confirmation();
+        if (!confirmation) return;
+    }
+
+    if (toggles.at_off && value == false) {
         applySettings(toggles.at_off);
     }
 
@@ -285,35 +302,26 @@ function patch() {
     const smartadd_content = vdbg.querySelector(".smartadd_content:has(.internal-config)");
     const logview_section = vdbg.querySelector(".smartadd_content:has(.internal-config) .logview-title");
     const logview_title = vdbg.querySelector(".smartadd_content:has(.internal-config) .logview-title-top");
-    const kill_config_buttons_1 = vdbg.querySelectorAll(".logview-extra-buttons");
-    const kill_expander_head = vdbg.querySelector(".internal-config-section-title.yt-uix-expander-head");
-    const kill_sections = vdbg.querySelector(".internal-config-multiple-sections");
-    const transform_options = container.querySelectorAll(".internal-setting, .internal-setting-description");
-
     let options = [];
     const no_descriptions = [
         "No description.",
         " description."
     ];
 
-    kill_expander_head.style.display = "none";
-
-    if (kill_sections) {
-        kill_sections.style.display = "none";
-    }
-
-    for (const node of kill_config_buttons_1) {
-        node.remove();
-    }
-
     /*
     ** === config actions ===
     */
 
+    const kill_config_buttons_1 = vdbg.querySelectorAll(".logview-extra-buttons");
+    for (const node of kill_config_buttons_1) {
+        node.remove();
+    }
+
     const config_buttons = document.createElement("div");
+
     config_buttons.className = "logview-extra-buttons";
+
     logview_title.append(config_buttons);
-    console.log(config_buttons);
 
     for (const data of template_config_buttons) {
         const button = createButton(data.label, data.type);
@@ -377,81 +385,210 @@ function patch() {
     ** === transform options ===
     */
 
-    for (const node of transform_options) {
-        const node_text = node.innerText;
+    function transformOptions() {
+        const transform_sections = container.querySelectorAll(".internal-config-section.yt-uix-expander");
+        const is_sectioned = container.querySelector(".internal-config-multiple-sections");
 
-        if (node.classList.contains("internal-setting")) {
-            options.push({
-                node: node,
-                id: node_text.trim()
-            });
+        const data_options = [];
+        const data_sections = ["All"];
 
-            continue;
-        }
+        for (const section of transform_sections) {
+            const section_name = section.querySelector(".internal-config-section-title").innerText;
+            const transform_options = section.querySelectorAll(".internal-setting, .internal-setting-description");
 
-        if (node.classList.contains("internal-setting-description")) {
-            if (true && no_descriptions.includes(node_text)) {
-                node.remove();
-                continue;
+            data_sections.push(section_name);
+
+            for (const node of transform_options) {
+                const node_text = node.innerText;
+
+                if (node.classList.contains("internal-setting")) {
+                    const data = {
+                        node: node,
+                        id: node_text.trim()
+                    }
+
+                    if (is_sectioned) {
+                        data.tags = [section_name];
+                    }
+
+                    data_options.push(data);
+
+                    continue;
+                }
+
+                if (node.classList.contains("internal-setting-description")) {
+                    if (true && no_descriptions.includes(node_text)) {
+                        node.remove();
+                        continue;
+                    }
+
+                    data_options[data_options.length - 1].description = {
+                        node: node,
+                        text: node_text
+                    }
+
+                    continue;
+                }
             }
 
-            options[options.length - 1].description = {
-                node: node,
-                text: node_text
-            }
-
-            continue;
+            section.style.display = "none";
         }
+
+        return ({
+            options: data_options,
+            sections: (is_sectioned) ? data_sections : null
+        });
     }
 
-    function showOption(option, is_show) {
-        const visibility = (is_show) ? null : "none";
-
-        option.node.style.display = visibility;
-        if (option.description?.node) {
-            option.description.node.style.display = visibility;
-        }
-    }
-
-    function appendOption(option) {
-        container.append(option.node);
-        if (option.description?.node) {
-            container.append(option.description.node);
-        }
-    }
-
-    const search_header = document.createElement("div");
-    search_header.className = "mdt2-vdbg-subtitle mdt2-vdbg-margin-bottom";
-    search_header.innerText = "All available and toggleable settings. Please note that some settings may be incompatible with each other, which may result in issues with page rendering.";
-
-    const search_bar = document.createElement("input");
-    search_bar.classList = "mdt2-vdbg-config-search-bar yt-uix-form-input-text";
-    search_bar.placeholder = "Search";
-
-    container.prepend(search_bar);
-    container.prepend(search_header);
-
-    search_bar.addEventListener("input", event => {
-        const query = search_bar.value
-            .toLowerCase()
+    function filterOptions(data, query, tags) {
+        const query_id = query
+            ?.toLowerCase()
             .replaceAll(" ", "_");
+        const query_description = query
+            ?.toLowerCase();
 
-        for (let i = 0; i < options.length; i++) {
-            const option = options[i];
+        const options = data.options.filter(option => {
             const option_id = option.id.toLowerCase();
+            const option_description = option.description?.text
+                .toLowerCase();
+            const option_tags = option.tags;
 
-            showOption(option, option_id.includes(query));
+            if (query) {
+                if (!option_id.includes(query_id) && !option_description?.includes(query_description)) return;
+            }
+
+            if (option_tags && tags) {
+                if (!option_tags.includes(tags[0])) return;
+            }
+
+            return true;
+        });
+
+        return (options.length)
+            ? options
+            : null;
+    }
+
+    function renderOptions(options, is_sorted) {
+        options = (is_sorted)
+            ? alphabeticallySort(options)
+            : options;
+
+        for (const option of transformed_options.options) {
+            option.node.style.display = "none";
+
+            if (option.description) {
+                option.description.node.style.display = "none";
+            }
         }
-    });
 
-    if (true) {
-        const _options = alphabeticallySort(options);
+        if (!options) return;
 
-        console.log(_options);
+        for (const option of options) {
+            container.append(option.node);
+            option.node.style.display = null;
 
-        for (let i = 0; i < _options.length; i++) {
-            const option = _options[i];
-            appendOption(option);
+            if (option.description) {
+                container.append(option.description.node);
+                option.description.node.style.display = null;
+            }
         }
+    }
+
+    const transformed_options = transformOptions();
+    renderOptions(transformed_options.options, true);
+
+    window.searchOptions = (query, tags) => {
+        console.log(filterOptions(transformed_options, query, tags));
+    }
+
+    /*
+    ** search
+    */
+
+    const settings_subtitle = document.createElement("div");
+    const search_controls = document.createElement("div");
+    const search_bar = document.createElement("input");
+    const search_tags = document.createElement("select");
+    const search_no_results = document.createElement("div");
+
+    const quotes_no_result = [
+        "You might have misspelled something.",
+        "Maybe try again?",
+        "Dont give up, searcher!",
+        "It probably has a different name than you think.",
+        "Maybe you're searching the wrong thing?",
+        "Do you think it really exists?",
+        "Anyway, how's your day going?",
+        "Sorry.",
+        "🍌 Empathy banana is here for you.",
+        "That's all we know."
+    ];
+
+    function getNoResultQuote() {
+        let text = "No results found.";
+
+        if (Math.random() < 0.1) {
+            text += "\n" + quotes_no_result[Math.floor(Math.random() * quotes_no_result.length)];
+        }
+
+        return text;
+    }
+
+    settings_subtitle.className = "mdt2-vdbg-subtitle mdt2-vdbg-margin-bottom";
+    settings_subtitle.innerText = "All available and toggleable settings. Please note that some settings may be incompatible with each other, which may result in issues with page rendering.";
+    search_controls.className = "mdt2-vdbg-config-search-controls";
+    search_bar.className = "mdt2-vdbg-config-search-bar yt-uix-form-input-text";
+    search_bar.placeholder = "Search";
+    search_tags.className = "mdt2-vdbg-config-search-tags yt-uix-form-input-text";
+    search_no_results.className = "mdt2-vdbg-subtitle mdt2-vdbg-margin-top";
+    search_no_results.style.display = "none";
+
+    container.prepend(search_no_results);
+    container.prepend(search_controls);
+    container.prepend(settings_subtitle);
+
+    search_controls.append(search_bar);
+
+    if (transformed_options.sections) {
+        search_controls.append(search_tags);
+
+        for (const option of transformed_options.sections) {
+            const node_option = document.createElement("option");
+
+            node_option.value = option;
+            node_option.innerText = option;
+
+            search_tags.append(node_option);
+        }
+    }
+
+    for (const widget of [search_bar, search_tags]) {
+        const method = (widget == search_bar)
+            ? "input"
+            : "change";
+
+        widget.addEventListener(method, () => {
+            const data = transformed_options;
+            const query = search_bar.value;
+            const tags = (search_tags.value == "All")
+                ? null
+                : [search_tags.value]
+
+            const filtered_options = filterOptions(data, query, tags);
+            const is_sorted = (!query && !tags);
+
+            renderOptions(filtered_options, is_sorted);
+
+            if (filtered_options) {
+                search_no_results.style.display = "none";
+            } else {
+                if (search_no_results.style.display) {
+                    search_no_results.innerText = getNoResultQuote();
+                }
+
+                search_no_results.style.display = null;
+            }
+        });
     }
 }
