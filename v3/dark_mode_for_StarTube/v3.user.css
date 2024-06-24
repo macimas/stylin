@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         dark mode support for StarTube
 @description  a messy attempt to add dark mode for StarTube's layouts + very minor tweaks
-@version      1.2
+@version      1.3
 
 @preprocessor stylus
 
@@ -34,14 +34,12 @@
 		border-color: var(--color-d3);
 	}
 
-	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) #st-settings-dd-sidebar {
-		border-color: var(--color-e8)
-	}
+	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) #st-settings-dd-sidebar
+	{ border-color: var(--color-e8) }
 
 	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .st-dd-sidebar-item,
-	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .sidebar-item {
-		color: var(--color-333);
-	}
+	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .sidebar-item
+	{ color: var(--color-333) }
 
 	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss).st-dd-sidebar-item:hover,
 	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .sidebar-item:hover {
@@ -50,14 +48,12 @@
 	}
 
 	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .st-dd-sidebar-item:hover::before,
-	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .sidebar-item:hover::before {
-		border-color: transparent var(--color-bf);
-	}
+	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .sidebar-item:hover::before
+	{ border-color: transparent var(--color-bf) }
 
 	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .st-dd-sidebar-item:hover::after,
-	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .sidebar-item:hover::after {
-		border-color: transparent var(--color-fa);
-	}
+	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .sidebar-item:hover::after
+	{ border-color: transparent var(--color-fa) }
 
 	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .st-dd-sidebar-item.active,
 	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .sidebar-item.active {
@@ -66,61 +62,51 @@
 	}
 
 	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .st-dd-sidebar-item.active::before,
-	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .sidebar-item.active::before {
-		border-color: transparent var(--color-bf)
-	}
+	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .sidebar-item.active::before
+	{ border-color: transparent var(--color-bf) }
 
 	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .st-dd-sidebar-item.active::after,
-	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .sidebar-item.active::after {
-		border-color: transparent var(--color-e9)
-	}
+	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .sidebar-item.active::after
+	{ border-color: transparent var(--color-e9) }
 
-	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .st-settings-section .st-settings-dd-title {
-		color: var(--color-444);
-	}
+	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .st-settings-section .st-settings-dd-title
+	{ color: var(--color-444) }
 
 	#startube13-settings-window {
 		position: absolute;
 		z-index: 2000000001;
 	}
 
-	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) #startube13-settings-window .lb-setting[checked="true"] .lb-checkbox {
-		background: no-repeat url(//s.ytimg.com/yts/imgbin/www-hitchhiker-vflEXP50f.png) 0 -1125px;
-	}
+	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) #startube13-settings-window .lb-setting[checked="true"] .lb-checkbox
+	{ background: no-repeat url(//s.ytimg.com/yts/imgbin/www-hitchhiker-vflEXP50f.png) 0 -1125px }
 
 	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .lb-border {
 		margin: 12px 0;
 		padding: unset;
 	}
 	
-	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .lb-setting:not(.yt-uix-button) {
-		margin-bottom: 10px;
-	}
+	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .lb-setting:not(.yt-uix-button)
+	{ margin-bottom: 10px }
 	
 	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .lb-setting:not(.yt-uix-button) .lb-explanation {
 		margin-top: 5px;
 		margin-left: 24px;
 	}
 	
-	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .lb-border {
-		border-color: var(--color-ccc);
-	}
+	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .lb-border
+	{ border-color: var(--color-ccc) }
 
-	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .lb-setting:hover .lb-checkbox {
-		border-color: #fff5a5;
-	}
+	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .lb-setting:hover .lb-checkbox
+	{ border-color: #fff5a5 }
 
-	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .lb-setting:not(.yt-uix-button):hover .lb-setting-text {
-		color: #fff5a5;
-	}
+	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .lb-setting:not(.yt-uix-button):hover .lb-setting-text
+	{ color: #fff5a5 }
 
-	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .lb-setting:not(.yt-uix-button) .lb-explanation {
-		color: var(--color-666);
-	}
+	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .lb-setting:not(.yt-uix-button) .lb-explanation
+	{ color: var(--color-666) }
 
-	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .lb-setting:not(.yt-uix-button):hover .lb-explanation {
-		color: #ffd5a5;
-	}
+	html:has(.css-httpsvorapispagesdevproductv3resourcesjfkdarkmodecss) .lb-setting:not(.yt-uix-button):hover .lb-explanation
+	{ color: #ffd5a5 }
 	
 	/*
 	** === alt watch 9 ===
@@ -149,6 +135,23 @@
 		color: var(--color-666);
 	}
 	
+	#st-account-menu-details a {
+		color: var(--color-333);
+		background: var(--color-f8);
+		border-color: var(--color-d3);
+	}
+
+	#st-account-menu-details a:hover {
+		background: var(--color-f0);
+		border-color: var(--color-c6);
+	}
+
+	#st-account-menu-details a:active
+	{ background: var(--color-e9) }
+	
+	#st-account-menu-settings span
+	{ filter: invert(1) }
+	
 	.channel-name, .related-tab
 	{ color: var(--color-333) }
 	
@@ -157,6 +160,15 @@
 	
 	.tab-flex
 	{ border-color: var(--color-ccc) }
+	
+	#st-account-menu .yt-masthead-multilogin-user {
+		background: var(--color-f5);
+		border-color: var(--color-ccc);
+		border-top-color: #000a;
+	}
+	
+	#st-account-menu .yt-masthead-multilogin-user:hover
+	{ background: var(--color-eee) }
 	
 	/*
 	** === account menu ===
@@ -167,38 +179,35 @@
 		border-color: var(--color-c5);
 	}
 	
-	.st-account-menu-header {
-		background: var(--color-bbb);
-	}
+	.st-account-menu-header
+	{ background: var(--color-bbb) }
 	
-	#st-account-menu .yt-uix-card-body-arrow-vertical {
-		border-bottom-color: var(--color-bbb);
-	}
+	#st-account-menu .yt-uix-card-body-arrow-vertical
+	{ border-bottom-color: var(--color-bbb) }
 	
-	#st-account-menu-footer {
-		background: var(--color-f5);
-	}
+	#st-account-menu-footer
+	{ background: var(--color-f5) }
 
 	/*
 	** === general tweaks ===
 	*/
 
-	#yt-masthead-user #sb-button-notify {
-		background: unset !important
-	}
+	#yt-masthead-user #sb-button-notify
+	{ background: unset !important }
 
-	.cardified-page .feed-item-container {
-		border-color: var(--color-f1);
-	}
+	.cardified-page .feed-item-container
+	{ border-color: var(--color-f1) }
 
-	[exp-modern-styles]:not([exp-polymer-styles]) .yt-uix-shelfslider.compact-shelf .yt-uix-button-shelf-slider-pager, [exp-modern-styles]:not([exp-polymer-styles]) .compact-shelf .yt-uix-button-shelf-slider-pager {
-		background: var(--color-e5)
-	}
+	[exp-modern-styles]:not([exp-polymer-styles]) .yt-uix-shelfslider.compact-shelf .yt-uix-button-shelf-slider-pager, [exp-modern-styles]:not([exp-polymer-styles]) .compact-shelf .yt-uix-button-shelf-slider-pager
+	{ background: var(--color-e5) }
 	
 	html:not([exp-cosmic-guide-style]) #startube-guide-top-left,
 	html:not([exp-cosmic-guide-style]) #startube-guide-profile-section,
 	html:not([exp-cosmic-guide-style]) #startube-guide-z-section
 	{ border-color: var(--color-e2) }
+	
+	.distiller_yt_instance, .distiller_yt_headline
+	{ background: unset !important }
 
 	/* text */
 
@@ -212,11 +221,12 @@
 		color: var(--color-222);
 	}
 	
-	[exp-modern-styles]:not([exp-polymer-styles]) .watch-view-count {
-		color: var(--color-666);
-	}
-	
-	[exp-modern-styles]:not([exp-polymer-styles]) #watch-like:not(.yt-uix-button-toggled) .yt-uix-button-content, [exp-modern-styles]:not([exp-polymer-styles]) #watch-dislike .yt-uix-button-content
+	[exp-polymer-styles] .video-list .video-list-item .description,
+	[exp-polymer-styles] .video-list .video-list-item .stat,
+	[exp-polymer-styles] .video-list .video-list-item .stat b
+	[exp-modern-styles]:not([exp-polymer-styles]) .watch-view-count,
+	[exp-modern-styles]:not([exp-polymer-styles]) #watch-like:not(.yt-uix-button-toggled) .yt-uix-button-content,
+	[exp-modern-styles]:not([exp-polymer-styles]) #watch-dislike .yt-uix-button-content
 	{ color: var(--color-666) }
 
 	.yt-lockup-meta .yt-lockup-meta-info:first-child,
@@ -229,6 +239,19 @@
 	[exp-modern-styles]:not([exp-polymer-styles]) .result-item-padding .yt-lockup-content > div .run {
 		color: var(--color-555);
 	}
+
+	[exp-modern-styles] #watch-discussion .distiller_yt_instance .reply-button.focus_caller
+	{ color: var(--color-555) }
+	
+	[exp-modern-styles] #watch-discussion .distiller_yt_instance .metadata .detail_link
+	{ color: var(--color-777) }
+    
+    #watch10-title span,
+    #eow-description,
+    #watch10-views-info span,
+    #watch10-desc button,
+    [exp-polymer-styles] #watch7-sidebar-contents .autoplay-bar .watch-sidebar-head
+    { color: #fcfcfc }
 	
 	/* icons */
 	
@@ -252,9 +275,8 @@
 		text-shadow: 0 1px 0 #000;
 	}
 
-	[exp-watch5d] #watch5-title #watch-headline-title .yt-uix-expander-head {
-		color: var(--color-333);
-	}
+	[exp-watch5d] #watch5-title #watch-headline-title .yt-uix-expander-head
+	{ color: var(--color-333) }
 
 	[exp-watch5d] .watch .yt-uix-button-subscribe-branded span,
 	[exp-watch5d] .watch .yt-uix-button-subscribed-branded span,
@@ -284,38 +306,32 @@
 	#watch-like, #watch-dislike
 	{ opacity: 1 }
 	
-	[exp-epic-watch7] #watch7-sentiment-actions .yt-uix-button:not(.yt-uix-button-toggled):not(#watch-like:active) .yt-uix-button-icon-wrapper
+	#ltod #watch7-sentiment-actions .yt-uix-button:not(.yt-uix-button-toggled):not(#watch-like:active) .yt-uix-button-icon-wrapper
 	{ opacity: 0.6 }
 
 	[exp-watch5c] #watch5-description a,
 	[exp-watch5c] #watch5-upload-date a,
-	[exp-watch5c] .watch5 #watch-description a {
-		color: var(--dark-color-link);
-	}
+	[exp-watch5c] .watch5 #watch-description a
+	{ color: var(--dark-color-link) }
 
 	[exp-epic-watch7] #watch-uploader-info::before
 	{ color: var(--color-111) }
 
-	.distiller_yt_instance, .distiller_yt-thread_user-content .cssAction_Expander, .distiller_yt_headline {
-		background: unset !important
-	}
+	.distiller_yt_instance, .distiller_yt-thread_user-content .cssAction_Expander, .distiller_yt_headline
+	{ background: unset !importan }
 
-	#watch7-secondary-actions .yt-uix-button {
-		opacity: 1;
-	}
+	#watch7-secondary-actions .yt-uix-button
+	{ opacity: 1 }
 
-	#watch7-secondary-actions .yt-uix-button:hover {
-		color: var(--color-444) !important;
-	}
+	#watch7-secondary-actions .yt-uix-button:hover
+	{ color: var(--color-444) !important }
 
-	#watch7-secondary-actions .yt-uix-button.yt-uix-button-toggled {
-		color: var(--color-333) !important;
-	}
+	#watch7-secondary-actions .yt-uix-button.yt-uix-button-toggled
+	{ color: var(--color-333) !important }
 
 	#watch7-secondary-actions .yt-uix-button:not(.yt-uix-button-toggled)::before,
-	[exp-epic-watch7] #watch7-secondary-actions .yt-uix-button:not(.hid):not(.yt-uix-button-toggled) img {
-		opacity: 0.5
-	}
+	[exp-epic-watch7] #watch7-secondary-actions .yt-uix-button:not(.hid):not(.yt-uix-button-toggled) img
+	{ opacity: 0.5 }
 
 	/* guild builder */
 
@@ -363,9 +379,8 @@
 	[exp-watch5d] #watch7-user-header .yt-user-name,
 	[exp-epic-watch7] #watch7-user-header .yt-user-name,
 	[exp-epic-watch7] .yt-uix-button-text,
-	[exp-epic-watch7] body .yt-uix-button-text[disabled] {
-		text-shadow: 0 1px 0 #000 !important;
-	}
+	[exp-epic-watch7] body .yt-uix-button-text[disabled]
+	{ text-shadow: 0 1px 0 #000 !important }
 	
 	[exp-epic-watch7] #watch7-sentiment-actions .yt-uix-button:not(.yt-uix-button-toggled):not(#watch-like:active) .yt-uix-button-icon-wrapper
 	{ filter: unset }
@@ -509,8 +524,15 @@
 		color: var(--color-555) !important;
 	}
 	
-	[exp-watch5d] #watch7-sentiment-actions .yt-uix-button:not(.yt-uix-button-toggled):not(#watch-like:active) .yt-uix-button-icon-wrapper {
-		filter: unset;
+	[exp-watch5d] #watch7-sentiment-actions .yt-uix-button:not(.yt-uix-button-toggled):not(#watch-like:active) .yt-uix-button-icon-wrapper
+	{ filter: unset }
+
+	[exp-classic-buttons] .feed-item-container.browse-list-item-container .compact-shelf .yt-uix-shelfslider-next,
+	[exp-classic-buttons] .feed-item-container.browse-list-item-container .compact-shelf .yt-uix-shelfslider-prev,
+	[exp-classic-buttons] .feed-item-container.browse-list-item-container .compact-shelf .yt-uix-shelfslider-next:hover,
+	[exp-classic-buttons] .feed-item-container.browse-list-item-container .compact-shelf .yt-uix-shelfslider-prev:hover {
+		background: var(--color-fff) !important;
+		box-shadow: unset
 	}
 
 	[exp-epic-watch7] #watch-like,
@@ -583,16 +605,14 @@
 
 	[exp-watch5c] .watch5 .yt-uix-button-subscribe-branded:active,
 	[exp-watch5c] .watch5 .yt-uix-button-subscribed-branded:active,
-	[exp-watch5c] .watch5 #watch5-actions-views-row .yt-uix-button:active {
-		background-image: linear-gradient(var(--color-f1), var(--color-fff)) !important;
-	}
+	[exp-watch5c] .watch5 #watch5-actions-views-row .yt-uix-button:active
+	{ background-image: linear-gradient(var(--color-f1), var(--color-fff)) !important }
 
 	[exp-aozora-subscribe] .yt-uix-button-subscribe-branded .yt-uix-button-content span, [exp-aozora-subscribe] .yt-uix-button-subscribed-branded .yt-uix-button-content span, [exp-watch5c] .watch5 .yt-uix-button-subscribe-branded .yt-uix-button-content span, [exp-watch5c] .watch5 .yt-uix-button-subscribed-branded .yt-uix-button-content span, [exp-watch5c] .watch5 #watch5-actions-views-row #ltod .run
 	{ color: #fff !important }
 
-	[exp-aozora-styles] #watch7-sidebar .video-list-item a:hover {
-		background: #1b293f;
-	}
+	[exp-aozora-styles] #watch7-sidebar .video-list-item a:hover
+	{ background: #1b293f }
 
 	/* masthead */
 
@@ -601,13 +621,11 @@
 		border-color: var(--color-e2);
 	}
 
-	[exp-aozora-header] body .v3 #yt-masthead #logo {
-		background: no-repeat url(https://s.ytimg.com/yt/imgbin/www-master-vflai4i-q.png) -41px -120px !important;
-	}
+	[exp-aozora-header] body .v3 #yt-masthead #logo
+	{ background: no-repeat url(https://s.ytimg.com/yt/imgbin/www-master-vflai4i-q.png) -41px -120px !important }
 
-	[exp-aozora-header] body .v3 #yt-masthead #masthead-search-terms {
-		border-color: var(--color-ccc);
-	}
+	[exp-aozora-header] body .v3 #yt-masthead #masthead-search-terms
+	{ border-color: var(--color-ccc) }
 
 	[exp-aozora-header] body .v3 #masthead-search-terms input {
 		background: var(--color-f4);
@@ -643,13 +661,11 @@
 
 	/* sidebar */
 
-	[exp-cosmic-guide-style] #startube-guide-top-left {
-		background: var(--color-bf);
-	}
+	[exp-cosmic-guide-style] #startube-guide-top-left
+	{ background: var(--color-bf) }
 
-	[exp-cosmic-guide-style] #appbar-guide-menu #guide-container {
-		background: unset !important;
-	}
+	[exp-cosmic-guide-style] #appbar-guide-menu #guide-container
+	{ background: unset !important }
 
 	/* masthead */
 
@@ -709,7 +725,11 @@
 	[cosmic-styles] #watch7-sidebar-contents .autoplay-bar .watch-sidebar-head, [cosmic-styles] .new .watch-sidebar-head
 	{ color: var(--color-333) !important }
 
-	[exp-watch5d] #watch-like .yt-uix-button-icon
+	[exp-watch5d] #watch-like .yt-uix-button-icon,
+	[exp-watch5d] #watch-dislike .yt-uix-button-icon
+	{ filter: invert(1) brightness(1.2) }
+	
+	[exp-watch5d] #watch-like:hover .yt-uix-button-icon
 	{ filter: brightness(1.2) }
 
 	[exp-watch5d] .watch5 #watch-like.yt-uix-button-toggled span
@@ -744,6 +764,12 @@
 	#watch7-secondary-actions .yt-uix-button::before
 	{ filter: invert(1) }
 	
+	#watch5-horizontal-rule
+	{ background: var(--color-ddd) }
+	
+	.watch5 #watch-description-toggle .yt-uix-button-text
+	{ text-shadow: 0 0 0 transparent, 0 1px 0 #000 }
+	
 	/*
 	** === epic panda ===
 	*/
@@ -763,18 +789,22 @@
 	
 	[exp-classic-title] #watch-headline-title .yt-uix-expander-head
 	{ color: var(--color-black-text) }
-	
+    
+    
 
+	
+	
 	/*
 	** modern layouts
 	*/
 
-	g#youtube-paths,
-	#you-path {
-		filter: invert(1) brightness(2);
-	}
-	
-	
+    [exp-invert-logo] #yt-masthead #logo-container #logo {
+        background: var(--mdt2-modern-logo) !important;
+        background-size: 100px 30px !important;
+    }
+    
+	g#youtube-paths, #you-path
+	{ filter: invert(1) brightness(2) }
 
 	[exp-outline-icons] .guide-item-selected .startube-svg svg, [exp-outline-icons] .startube-svg svg, [exp-outline-icons] .wmr-action, [exp-outline-icons] .outline-icon svg, [exp-outline-icons] #watch-like span, [exp-outline-icons] #watch-like svg, [exp-outline-icons] #watch-dislike span, [exp-outline-icons] #watch-dislike svg {
 		color: #fcfcfc !important;
@@ -795,47 +825,64 @@
 	[exp-modern-styles] #watch7-sidebar .continuation_item_wrapper button
 	{ border-color: var(--color-d9) }
 
+    
+    /* buttons */
+
+    [exp-modern-styles] .watch8-button,
+    [exp-modern-styles] #watch-like:not(.yt-uix-button-toggled),
+    [exp-modern-styles] #watch-dislike:not(.yt-uix-button-toggled),
+    [exp-modern-styles] .watch8-button:hover,
+    [exp-modern-styles] #watch-like:not(.yt-uix-button-toggled):hover,
+    [exp-modern-styles] #watch-dislike:not(.yt-uix-button-toggled):hover {
+        color: var(--color-666);
+        opacity: 1;
+    }
+    
+    [exp-modern-styles] .watch8-button img,
+    [exp-modern-styles] .watch8-button::before,
+    [exp-modern-styles] #watch-like:not(.yt-uix-button-toggled) img,
+    [exp-modern-styles] #watch-dislike:not(.yt-uix-button-toggled) img
+    { opacity: 0.5 }
+
+    [exp-modern-styles] .watch8-button:hover img,
+    [exp-modern-styles] .watch8-button:hover::before,
+    [exp-modern-styles] #watch-like:not(.yt-uix-button-toggled):hover img,
+    [exp-modern-styles] #watch-dislike:not(.yt-uix-button-toggled):hover img
+    { opacity: 0.6 }
+    
+    
 	/*
 	** polymer
 	*/
 
-	[exp-polymer-shell] {
-		--default-body-background-img: var(--color-ed);
-	}
+	[exp-polymer-shell]
+	{ --default-body-background-img: var(--color-ed) }
 
-	[exp-polymer-shell] .branded-page-v2-primary-col .branded-page-box {
-		background: unset;
-	}
+	[exp-polymer-shell] .branded-page-v2-primary-col .branded-page-box
+	{ background: unset }
 
-	[exp-polymer-shell] .startube-guide-expand-button, [exp-polymer-shell] .guide-item {
-		color: #fff !important;
-	}
+	[exp-polymer-shell] .startube-guide-expand-button, [exp-polymer-shell] .guide-item
+	{ color: #fff !important }
 
-	[exp-polymer-shell] .startube-svg svg {
-		fill: #fff
-	}
+	[exp-polymer-shell] .startube-svg svg
+	{ fill: #fff }
 
-	[exp-polymer-styles] .yt-lockup-meta-info .g-hovercard a, [exp-polymer-styles] .yt-lockup-deemphasized-text, [exp-polymer-styles] .view-count-stat {
-		color: var(--color-666);
-	}
+	[exp-polymer-styles] .yt-lockup-meta-info .g-hovercard a, [exp-polymer-styles] .yt-lockup-deemphasized-text, [exp-polymer-styles] .view-count-stat
+	{ color: var(--color-666) }
 
 	/* masthead */
 
-	[exp-polymer-shell] #masthead-positioner #yt-masthead-container {
-		background: var(--color-dc) !important;
-	}
+	[exp-polymer-shell] #masthead-positioner #yt-masthead-container
+	{ background: var(--color-dc) !important }
 
-	[exp-polymer-shell] #yt-masthead #masthead-search-terms input {
-		color: #fff
-	}
+	[exp-polymer-shell] #yt-masthead #masthead-search-terms input
+	{ color: #fff }
 
-	[exp-polymer-shell] #yt-masthead #search-btn {
-		background: var(--color-ccc)
-	}
+	[exp-polymer-shell] #yt-masthead #search-btn
+	{ background: var(--color-ccc) }
 
-	[exp-polymer-shell] #masthead-expanded-container {
-		background: var(--color-dc) !important;
-	}
+	[exp-polymer-shell] #masthead-expanded-container
+	{ background: var(--color-dc) !important }
 	
 	/* search */
 	
@@ -846,24 +893,22 @@
 	/* guide */
 
 	[exp-polymer-shell] .guide-pinning-enabled.guide-pinned #appbar-guide-menu,
+	[exp-polymer-shell] #appbar-guide-menu #guide-container
 	[exp-polymer-shell] .guide-pinning-enabled.show-guide.guide-pinned #appbar-guide-menu,
-	[exp-polymer-shell] #appbar-guide-menu #guide-container, .site-center-aligned:not(.guide-pinned) #appbar-guide-menu:before,
 	[exp-polymer-shell] .site-center-aligned:not(.guide-pinned) #appbar-guide-menu:after
 	{ background: var(--color-dc) !important }
-
+	
 	[exp-polymer-shell] #guide-container .guide-item.guide-item-selected {
 		color: #fff !important;
 		background: var(--color-c5) !important;
 	}
 
-	[exp-polymer-shell] #guide-container h3 {
-		color: var(--color-666) !important;
-	}
+	[exp-polymer-shell] #guide-container h3
+	{ color: var(--color-666) !important }
 
 	.yt-scrollbar #appbar-guide-menu::-webkit-scrollbar-thumb,
-	.yt-scrollbar #appbar-guide-menu::-webkit-scrollbar-track {
-		border-color: var(--color-dc);
-	}
+	.yt-scrollbar #appbar-guide-menu::-webkit-scrollbar-track
+	{ border-color: var(--color-dc) }
 
 	/* home page */
 	
@@ -881,11 +926,55 @@
 
 	/* channel page */
 
-	[exp-polymer-styles] .site-center-aligned:not(.cardified-page) .branded-page-v2-top-row {
-		background: var(--color-dc);
-	}
+	[exp-polymer-styles] .site-center-aligned:not(.cardified-page) .branded-page-v2-top-row
+	{ background: var(--color-dc) }
 
-	[exp-polymer-channels] .channel .yt-subscription-button-subscriber-count-branded-horizontal {
-		color: var(--color-666)
+	[exp-polymer-channels] .channel .yt-subscription-button-subscriber-count-branded-horizontal
+	{ color: var(--color-666) }
+	
+	/* watch 9 */
+
+	[exp-polymer-comments] .distiller_yt_headline b, [exp-polymer-comments] .distiller_yt_headline,
+	#watch9-title span,
+	#watch9-desc .run
+	{ color: #fff }
+	
+	#watch9-views-info span,
+	#watch9-container #watch-like-dislike-buttons span,
+	[exp-watch9b] #watch9-subtitle span,
+	.wmr-button
+	{ color: var(--color-666) }
+
+	#watch9-container .yt-uix-button:not(.yt-uix-button-toggled):not(#watch-like:active) .yt-uix-button-icon-wrapper
+	{ filter: unset }
+	
+	[exp-polymer-comments] .distiller_yt-sb .sb_text_input {
+		color: #fcfcfc;
+		background: var(--color-fff);
 	}
+	
+	[exp-polymer-comments] .distiller_yt-thread .author .profileLink span,
+	[exp-polymer-comments] .distiller_yt-post_comment_section .link_action .link_action_text
+	{ color: #fff !important }
+	
+	[exp-polymer-comments] .distiller_yt-thread .metadata,
+	[exp-polymer-comments] .distiller_yt-thread .metadata .detail_link,
+	[exp-polymer-comments] .distiller_yt-thread .action_bar .reply-button,
+	[exp-polymer-comments] .distiller_yt-thread .sentiment .count,
+	[exp-polymer-comments] .distiller_yt-thread .sentiment .count_active
+	{ color: var(--color-666) !important }
+	
+	[exp-polymer-comments] .distiller_yt-thread .comment .sentiment:not(.like.active) .oz-sprite
+	{ filter: unset }
+    
+    /* watch 10 */
+
+    [exp-outline-icons] #watch-like-dislike-buttons .yt-uix-button-icon-wrapper.startube-has-icon
+    { filter: unset !important }
+    
+    [exp-outline-icons] .video-extras-sparkbar-likes
+    { background: #fcfcfc }
+    
+    [exp-outline-icons] .video-extras-sparkbar-dislikes
+    { background: var(--color-96) }
 }
