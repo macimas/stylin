@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         mmm Library
 // @description  a general & config library for my v3 things
-// @version      1.0-dev1
+// @version      1.0-dev2
 
 // @icon         data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAG8AAABvCAYAAADixZ5gAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAE1UlEQVR4nO2d2a6jMAxAw2j+u/TLmYcRVRqyeI9d+Uh9uLcEUA7OTnqUUq6ShOTP7htI6KS8wKS8wKS8wKS8wKS8wKS8wKS8wKS8wKS8wKS8wKS8wKS8wKS8wKS8wKS8wKS8wKS8wPyFHHSd59ffR/N3soejTNawtNK+Eg6+G6VJ4fIM5c3EfRJXx2CPx15PS/51jddfHcehck0pROo8iLjRcdd5gtJDr4FhJg7y/c15Xp+PJd3I08iozwWR0TpL/znPIpN7EQQVs4q+nrDz7Kepjx0dg+EReb0MPc4TXWyt0lAfkDYdREJ7DFTc6lhMpLXHSkTpsrVJkbYC0xAaHYsRAElXRxj13NZ8RR63uOSIG0Xq43+vFylzr+sCiYNiXb/1APXzVsykHYAGCSi6X6/1fTQSIJItWpRaoqfyLPpmEuKoAqjpPERdKU2xWWekF3GUliTo2kbiNEU/Ik+jgUJNp9WB9tL5/t83pN8Lq5O+Rdz7vU0cpk9ngctZhZm4XVDEadeNLuV1QYrrPQC7i0vpKHUnrxt1GyOuFN2o40SnK3lS0RJlhISLG3naGU4tMntBT4m6O41k0elCnuSwFfchWKWnZL5Wi9SFvB6SjQupc+3sFvTYLs9jq/BmcztpyXZ5LRxx3AdhPnfn44Gq2SoPNJHKGGPlPAh11HHEQdJSuwuuIu8xpQOZ3xPCsnshFcXq8qRnwmfU8qNEHQfzyBtFDiSzIVF3HEfI1iWl6ATLk1xRpl3XYanv5446jw2UFnLkcRca/TrrUZjn99joMy02oUXmroaKx6ibLeZ11dq0pld8S4iDngMzRtoTqCqPsibGKupacV5GUzBFp3rkYVZb764jqVFXp8OeA7I0foTIuk1NokSdZD0Jnfx1U+ftKi5vdjZSqNd2Ic+yddnyfvtqXfYY3Z8LeVZ4Xh4xrvvGD5ZLeVbFZYSomwGSp94KrN5FsHx33Zu49n5W9zfdUOBGo07aMYNeX9PLbD0HkLxSvgVKRcevZaY1YHmJP1w2WBIYKS8wKS8wKS8wKS8wKS8wKS8wovN5nO0aMaM4d+fec8feYgRJrJNO3SgHm67NFG6GcB4EyiyF6NtPRUAedOAauq/YLJ3kE716ELRXdXMxrfNqWbvXq6zwPPd3oyJvtuhotTnqqn7k7J3JTeMN1QVItwjuFsaPY4/D5B12zsZzFg+Hyeqx2c5/ktNL0PoEWm9K1aXc840wq/OkZ8glM1YyU63ElaIkj9r6jIz0ZqwQtr1oQu33zaDs1s6J4PoDPVYSEXndHdeR2xGTrst8oqXrNO20LWKRhxHIPS+FX+gatLgamJaQbSHJy5iqqDyt6Jtek9hplyhyoR8txCOPKpCzNnSVQb9YZJaiODzWMhOo+TtBu7fH0nxwtg1Mr0BvVA4sPneLCzGrAO3HWb7eZSVOo0/Xw+yd9Brv00FUVtLczqTP0CwuH9cy/jFDqZ9yo2D2roL0tNDwOsrysMVhqK7CCKtB6FFmYffdHH0k7kUKFzsgrb5DX0d4w1XK9S0aR1te8bL66W7KyrDdK8JQ1y35ft4DrV8OkyblBcbVrEKCI+UFJuUFJuUFJuUFJuUFJuUFJuUFJuUFJuUFJuUFJuUFJuUFJuUFJuUFJuUFJuUFJuUF5h8jIZ3/XX866AAAAABJRU5ErkJggg==
 // @namespace    https://github.com/macimas
@@ -580,7 +580,7 @@ mmm.config = (info, layout) => {
 
 			data.label = info.id + "." + data.id;
 
-			if (!db[data.id]) {
+			if (db[data.id] == undefined) {
 				db[data.id] = data.value;
 			}
 
