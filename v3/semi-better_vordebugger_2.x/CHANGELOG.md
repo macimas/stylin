@@ -1,7 +1,7 @@
 # changelogs
 yep! also dates are based on GMT+8. just to let u know :)
 
-also as of `2.0-dev1`, userscript now requires [mmm Library]() to be installed. it lets me reuse stuff without having to copy and paste, and lets me create configs for my userscripts :)
+also as of `2.0-dev1`, userscript now requires [mmm Library](https://macimas.github.io/stylin/v3/mmm/v3.user.js?raw=true) to be installed. it lets me reuse stuff without having to copy and paste, and lets me create configs for my userscripts :)
 
 ## `2.0-dev1` (July 27, 2024)
 rewrote most of the script and added a bunch of stuff.<br>
