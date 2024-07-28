@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         semi-better vordebugger
 // @namespace    https://github.com/macimas
-// @version      2.0-dev1
+// @version      2.0-dev2
 
 // @icon         data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABAElEQVRYhWNgGOmAEZkjJCT0nx6Wvnv3Dm4vnCEkJPTf39+fHvYzbNy4Ee4IRmTLP3z4QBcHCAgIwB3BSG/L0R3BRFdbsYBRB7AQo2jL3a1kGe6j7E25A7bc3cpQPKeULAf0pnQTdAReB8Asv/L0KlkOKJ5TStARBNMAPss3B6xn2Bywniy9RDuA1mDAHUBULkAG2IIcWcx3QyBJ5g29EED2IcznpPoaGQx4CAy4A0iOAmRASdDDAMEQeHn4BdmGE6MXbwj4KHszbNmzlcGAwYgsB1zYc46yugDZEeQAqtSGxBpELhjwXDDqABYGBgaGDx8+0L1ZDgOM9OqOjQJcAADzNlkCLFjS4wAAAABJRU5ErkJggg==
 // @description  an attempt to improve the vordebugger
@@ -62,7 +62,8 @@ const config = mmm.config({
 		value: false,
 		info: [
 			"Exposes uimsg keys for translating vdbg.",
-			"If you do not know what this means, it's best you keep it off."
+			"If you do not know what this means, it's best you keep it off.",
+			"Requires page to be reload."
 		]
 	}]
 ]);
@@ -77,7 +78,7 @@ const css = new mmm.css_manager();
 
 (function(){
 uimsg.set({
-	placeholder: !config.get("create_uimsg_keys"),
+	placeholder: !config.get("expose_uimsg_keys"),
 	skip_if_present: true
 }, {
 	"mdt2_vdbg.title.utilities": "Utilities",
@@ -850,11 +851,11 @@ const hplate_reload_buttons = [
 
 const template_presets = [
 	{
-		label: "Centered Layout",
+		label: "Center Aligned",
 		icon: "centered-layout",
 		info: [
 			"Toggles center-aligned layout and appbar.",
-			"When toggled off, this will turn off related settings in Cardification to prevent a broken layout."
+			"When toggled off, this will turn off related settings in \"Cardification\" to prevent a broken layout."
 		],
 		toggles: {
 			default: [
@@ -895,7 +896,7 @@ const template_presets = [
 			"Toggles cardified layout, except for watch page.",
 			"For cardified layout in watch page, toggle Watch8.",
 			"",
-			"When toggled on, this will turn on related settings in Centered Layout to prevent a broken layout.",
+			"When toggled on, this will turn on related settings in \"Center Aligned\" to prevent a broken layout.",
 			"Said settings will not be turned off when this is toggled off."
 		],
 		toggles: {
@@ -924,7 +925,7 @@ const template_presets = [
 		icon: "cardification",
 		info: [
 			"Toggles cardified layout for watch page.",
-			"Intended to be used with Cardification."
+			"Intended to be used with \"Cardification\"."
 		],
 		toggles: {
 			default: [
@@ -1179,7 +1180,7 @@ const hplate_tab_button = (content) => (
 	]]
 );
 
-function createTabButton(data) {
+function createPageButton(data) {
 	const button = mmm.htemplate([
 		["div", {
 			className: "smartadd"
@@ -1195,7 +1196,7 @@ function createTabButton(data) {
 		]]
 	]);
 
-	button.setAttribute("data-tag", data.id);
+	button.setAttribute("data-tab", data.id);
 
 	vdbg_tabs_container.append(button);
 
@@ -1226,7 +1227,7 @@ function createTabButton(data) {
 		const data = buttons[text];
 		if (!data) continue;
 
-		const button = createTabButton(data);
+		const button = createPageButton(data);
 
 		title.style.display = "none";
 		button.addEventListener("click", () => {
@@ -1244,6 +1245,20 @@ function createTabButton(data) {
 		}
 	}
 })();
+
+function registerPage(data) {
+	const smartadd_html = mmm.htemplate([
+		["div", {
+			className: "smartadd"
+		}, [
+			["div", {
+				className: "smartadd_content"
+			}]
+		]]
+	]);
+
+
+}
 
 /*
 == patch debug ==
@@ -1301,14 +1316,16 @@ new MutationObserver((list, observer) => {
 }).observe(vdbg, { subtree: true, attributes: true });
 
 function appendStarTubeButton() {
-	const startube_button = vdbg_config.querySelector("#startube13-settings button");
-	if (!startube_button) return;
+	const startube = vdbg_config.querySelector("#startube13-settings");
+	if (!startube) return;
 
-	startube_button.remove();
+	const startube_button = startube.querySelector("button");
+	startube.classList.add("hid");
 
-	const button = mmm.htemplate([
-		hplate_tab_button(["StarTube"])
-	]);
+	const button = createPageButton({
+		id: "startube",
+		label: "StarTube"
+	});
 
 	button.setAttribute("vdbg-tab", "StarTube");
 

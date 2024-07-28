@@ -3,6 +3,13 @@ yep! also dates are based on GMT+8. just to let u know :)
 
 also as of `2.0-dev1`, userscript now requires [mmm Library](https://macimas.github.io/stylin/v3/mmm/v3.user.js?raw=true) to be installed. it lets me reuse stuff without having to copy and paste, and lets me create configs for my userscripts :)
 
+## `2.0-dev2` (July 28, 2024)
+minor fixes :p
+
+- fixed StarTube button duplication
+- renamed preset "Centered Layout" to "Center Aligned"
+- `expose_uimsg_keys` now actually works
+
 ## `2.0-dev1` (July 27, 2024)
 rewrote most of the script and added a bunch of stuff.<br>
 it's still not done, there's still things i want to polish up but i think it's mostly good enough to release something
