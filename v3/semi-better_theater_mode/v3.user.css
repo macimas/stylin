@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         semi-better theater mode
 @description  an attempt to make theater mode act more like in modern YouTube
-@version      2.12
+@version      2.13
 
 @updateURL  https://macimas.github.io/stylin/v3/semi-better_theater_mode/v3.user.css
 
@@ -64,7 +64,8 @@
 		transform: translate(-50%, -50%);
 	}
 	
-	base-page = ':not([data-player-size="fullscreen"]) #page.watch'
+	base-page = '#page.watch'
+	no-fullscreen = 'html:not([data-player-size="fullscreen"]) #page.watch'
 
 	/*
 	** there is an issue where the hitbox around the vordebugger may block video controls
@@ -191,6 +192,12 @@
 			{ transition: 0.24s bottom ease-out }
 		}
 	}
+	
+	{no-fullscreen} #player.watch-medium {
+		& .html5-video-container {
+			bottom: video-height-offset;
+		}
+	}
 
 	{base-page} #player.watch-medium {
 		padding-left: unset;
@@ -211,10 +218,6 @@
 		& video {
 			{fit-player};
 			object-fit: contain;
-		}
-
-		& .html5-video-container {
-			bottom: video-height-offset;
 		}
 
 		& .html5-video-content {
@@ -319,10 +322,10 @@
 		}
 
 		if (shrink-video-by-controls) {
-			{base-page} #player.watch-medium .ytp-block-autohide .html5-video-container
+			{no-fullscreen} #player.watch-medium .ytp-block-autohide .html5-video-container
 			{ bottom: video-shrink-height-offset }
 
-			{base-page} #player.watch-medium .ytp-block-autohide .ytp-subtitles-player-content
+			{no-fullscreen} #player.watch-medium .ytp-block-autohide .ytp-subtitles-player-content
 			{ bottom: video-shrink-height-offset }
 		}
 
