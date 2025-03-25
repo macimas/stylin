@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         minor navigation tweaks
 // @namespace    https://github.com/macimas
-// @version      1.1
+// @version      1.2
 
-// @description  yep!
+// @description  adds some keybinds for navigation & player
 // @author       macimas (https://macimas.github.io)
 
 // @match        www.youtube.com/*
@@ -47,9 +47,11 @@ const hk_helper_template = {
         "Next": "[Shift] + [N]",
         "Previous": "[Shift] + [P]"
     },
-    "Site navigation": {
+    "Site controls": {
         "Focus search bar": "[/]",
         "Toggle guide": "[Z]",
+        "Focus player": "[Enter]<br>(well, any key works)",
+        "Unfocus player": "[Escape]",
         "Show keyboard shortcuts": "[Shift] + [?]"
     }
 }
@@ -216,7 +218,7 @@ spitfire.append(style);
 
 window.addEventListener("keydown", event => {
     const player = document.querySelector("#movie_player");
-    const play_button = document.querySelector(".ytp-button-play");
+    const play_button = document.querySelector(".ytp-button-play .ytp-button-pause");
     const search_bar = document.querySelector("#masthead-search-term");
 
     const on_body = document.activeElement == document.body;
@@ -224,60 +226,83 @@ window.addEventListener("keydown", event => {
     const on_search_bar = document.activeElement == search_bar;
     const is_focused = (on_body || on_player);
 
+    // toggles helper
+
     if (is_focused && event.code == "Slash" && event.shiftKey) {
         event.preventDefault();
-        return hk_helper_hide("toggle");
+        hk_helper_hide("toggle");
+        return;
     }
 
-    const toggle_guide_button = document.querySelector("#yt-masthead #appbar-guide-button, .guide-module-toggle");
+    // hide helper
 
-    if (is_focused && search_bar && !on_search_bar && event.code == "Slash") {
-        event.preventDefault();
-        return search_bar.focus();
+    if (is_focused && event.code == "Escape") {
+        hk_helper_hide("add");
+        return;
     }
 
-    if (is_focused && toggle_guide_button && event.code == "KeyZ") {
-        event.preventDefault();
-        toggle_guide_button.click();
-    }
+    // ignore keys, let player handle volume
 
     if (event.code == "ArrowUp" || event.code == "ArrowDown") {
         return;
     }
 
-    if (is_focused && event.code == "Escape") {
-        hk_helper_hide("add");
+    // workaround fix for seeking
+
+    if (event.code == "ArrowLeft" && player && !on_player) {
+        player.focus();
+        player.seekBy(-5);
+        return;
     }
 
-    if (player) {
-        if (on_body && event.code != "Escape") {
-            player.focus();
-        }
-
-        if (on_player && event.code == "Escape") {
-            return player.blur();
-        }
+    if (event.code == "ArrowRight" && player && !on_player) {
+        player.focus();
+        player.seekBy(5);
+        return;
     }
 
-    const theater_button = document.querySelector("div.ytp-size-toggle-small, div.ytp-size-toggle-large");
-    const theater_button_is_upsell = document.querySelector("#upsell-video .ytp-size-toggle-large");
+    // toggle guide
 
-    if (is_focused && theater_button && event.code == "KeyT") {
-        theater_button.click();
+    const toggle_guide_button = document.querySelector("#yt-masthead #appbar-guide-button, .guide-module-toggle");
 
-        if (theater_button_is_upsell) {
-            alert("hello! this is the channel trailer speaking! thank you for pressing the theater key! as a reward, you get a pointless button for your work :D")
-        }
+    if (is_focused && search_bar && !on_search_bar && event.code == "Slash") {
+        event.preventDefault();
+        search_bar.focus();
+        return;
     }
+
+    if (is_focused && toggle_guide_button && event.code == "KeyZ") {
+        event.preventDefault();
+        toggle_guide_button.click();
+        return;
+    }
+
+    // navigate playlist
 
     const playlist_bar_prev = document.querySelector("#watch7-playlist-bar-controls .yt-uix-button-icon-playlist-bar-prev");
     const playlist_bar_next = document.querySelector("#watch7-playlist-bar-controls .yt-uix-button-icon-playlist-bar-next");
 
     if (is_focused && playlist_bar_prev && event.code == "KeyP" && event.shiftKey) {
         playlist_bar_prev.click();
+        return;
     }
 
     if (is_focused && playlist_bar_next && event.code == "KeyN" && event.shiftKey) {
         playlist_bar_next.click();
+        return;
+    }
+
+    // handle focusing of player
+
+    if (player) {
+        if (on_body && event.code != "Escape") {
+            player.focus();
+            return;
+        }
+
+        if (on_player && event.code == "Escape") {
+            player.blur();
+            return;
+        }
     }
 });
