@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         minor navigation tweaks
 // @namespace    https://github.com/macimas
-// @version      1.2
+// @version      1.3
 
 // @description  adds some keybinds for navigation & player
 // @author       macimas (https://macimas.github.io)
@@ -261,15 +261,25 @@ window.addEventListener("keydown", event => {
         return;
     }
 
-    // toggle guide
-
-    const toggle_guide_button = document.querySelector("#yt-masthead #appbar-guide-button, .guide-module-toggle");
+    // focus search
 
     if (is_focused && search_bar && !on_search_bar && event.code == "Slash") {
         event.preventDefault();
         search_bar.focus();
         return;
     }
+
+    // workaround for escaping search in Firefox
+
+    if (on_search_bar && event.code == "Escape") {
+        event.preventDefault();
+        search_bar.blur();
+        return;
+    }
+
+    // toggle guide
+
+    const toggle_guide_button = document.querySelector("#yt-masthead #appbar-guide-button, .guide-module-toggle");
 
     if (is_focused && toggle_guide_button && event.code == "KeyZ") {
         event.preventDefault();
