@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         minor navigation tweaks
 // @namespace    https://github.com/macimas
-// @version      1.3
+// @version      1.4
 
 // @description  adds some keybinds for navigation & player
 // @author       macimas (https://macimas.github.io)
@@ -314,5 +314,16 @@ window.addEventListener("keydown", event => {
             player.blur();
             return;
         }
+    }
+
+    // send livestream chat message by pressing Enter
+
+    const livestream_chat_button = document.querySelector(`.livestream_chat button[title]`);
+    const livestream_chat_box = document.querySelector(`.livestream_chat .sb_text_input.goog-scrollbar`);
+
+    if (document.activeElement == livestream_chat_box && event.code == "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        livestream_chat_button.click();
+        livestream_chat_box.blur();
     }
 });
