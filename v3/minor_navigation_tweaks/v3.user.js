@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name         minor navigation tweaks
 // @namespace    https://github.com/macimas
-// @version      1.4
+// @version      1.5
 
 // @description  adds some keybinds for navigation & player
 // @author       macimas (https://macimas.github.io)
 
-// @match        www.youtube.com/*
+// @match        https://www.youtube.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=youtube.com
 // @grant        none
 // ==/UserScript==
